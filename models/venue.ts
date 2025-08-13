@@ -9,7 +9,9 @@ const venueSchema = new mongoose.Schema<IVenue>({
   address: { type: String, required: true },
   price: { type: Number, required: true },
   email: { type: String },
-  ownerId: { type: String }
+  ownerId: { type: String },
+  images: [{ type: String }],
+  featuredImage: { type: String }
 }, {
   timestamps: true
 });
