@@ -5,7 +5,7 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/venue-booking';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://rehansaqib:Cusit%4012926@cluster0.koi0z.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
 export interface IStorage {
   getVenues(): Promise<IVenue[]>;
