@@ -431,6 +431,84 @@ export default function Home() {
         </div>
       </FloatingElement>
 
+      {/* Active Filters Summary */}
+      {(filters.priceRange[0] > 0 || filters.priceRange[1] < 2000000 ||
+        filters.capacityRange[0] > 0 || filters.capacityRange[1] < 5000 ||
+        filters.venueClass.length > 0 || searchTerm.length > 0) && (
+        <FloatingElement delay={0.65}>
+          <div className="bg-yellow-50 border border-yellow-200 py-4">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex items-center justify-between flex-wrap gap-4">
+                <div className="flex items-center space-x-4 flex-wrap">
+                  <span className="text-sm font-medium text-gray-700">Active filters:</span>
+
+                  {searchTerm && (
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-100 text-blue-800">
+                      Search: "{searchTerm}"
+                      <button
+                        onClick={() => setSearchTerm('')}
+                        className="ml-2 text-blue-600 hover:text-blue-800"
+                      >
+                        ×
+                      </button>
+                    </span>
+                  )}
+
+                  {(filters.priceRange[0] > 0 || filters.priceRange[1] < 2000000) && (
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-green-100 text-green-800">
+                      Price: Rs. {filters.priceRange[0].toLocaleString()} - Rs. {filters.priceRange[1].toLocaleString()}
+                      <button
+                        onClick={() => setFilters(prev => ({ ...prev, priceRange: [0, 2000000] }))}
+                        className="ml-2 text-green-600 hover:text-green-800"
+                      >
+                        ×
+                      </button>
+                    </span>
+                  )}
+
+                  {(filters.capacityRange[0] > 0 || filters.capacityRange[1] < 5000) && (
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-purple-100 text-purple-800">
+                      Capacity: {filters.capacityRange[0]} - {filters.capacityRange[1]} guests
+                      <button
+                        onClick={() => setFilters(prev => ({ ...prev, capacityRange: [0, 5000] }))}
+                        className="ml-2 text-purple-600 hover:text-purple-800"
+                      >
+                        ×
+                      </button>
+                    </span>
+                  )}
+
+                  {filters.venueClass.map(className => {
+                    const labels = { high: 'Premium', middle: 'Executive', standard: 'Standard' }
+                    const label = labels[className as keyof typeof labels]
+                    return (
+                      <span key={className} className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-yellow-100 text-yellow-800">
+                        Class: {label}
+                        <button
+                          onClick={() => handleClassFilter(className)}
+                          className="ml-2 text-yellow-600 hover:text-yellow-800"
+                        >
+                          ×
+                        </button>
+                      </span>
+                    )
+                  })}
+                </div>
+
+                <motion.button
+                  onClick={clearFilters}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="text-sm font-medium text-red-600 hover:text-red-800 underline"
+                >
+                  Clear all filters
+                </motion.button>
+              </div>
+            </div>
+          </div>
+        </FloatingElement>
+      )}
+
       {/* Stats Section */}
       <FloatingElement delay={0.7}>
         <div className="bg-white/80 backdrop-blur-sm border-y border-yellow-200">
