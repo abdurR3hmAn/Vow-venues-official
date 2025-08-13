@@ -201,9 +201,9 @@ export default function Home() {
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         {/* Background Pattern */}
-        <div className="absolute inset-0 bg-gradient-to-br from-pink-100 via-purple-50 to-rose-100 opacity-50" />
+        <div className="absolute inset-0 bg-gradient-to-br from-yellow-100 via-white to-amber-100 opacity-50" />
         <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ec4899' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f59e0b' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
         }} />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -215,11 +215,11 @@ export default function Home() {
                 animate={{ scale: 1 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
               >
-                <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-rose-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-yellow-600 via-amber-600 to-orange-600 bg-clip-text text-transparent">
                   Find Your
                 </span>
                 <br />
-                <span className="bg-gradient-to-r from-rose-600 via-pink-600 to-purple-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-amber-600 via-yellow-600 to-orange-600 bg-clip-text text-transparent">
                   Perfect Venue
                 </span>
               </motion.h1>
@@ -235,14 +235,14 @@ export default function Home() {
             <FloatingElement delay={0.4}>
               <div className="max-w-2xl mx-auto relative">
                 <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
-                  <Search className="h-6 w-6 text-pink-500" />
+                  <Search className="h-6 w-6 text-yellow-500" />
                 </div>
                 <motion.input
                   type="text"
                   placeholder="Search venues by name or location..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-14 pr-6 py-5 text-lg border-2 border-pink-200 rounded-2xl focus:ring-4 focus:ring-pink-200 focus:border-pink-500 transition-all duration-300 bg-white/80 backdrop-blur-sm shadow-lg"
+                  className="w-full pl-14 pr-6 py-5 text-lg border-2 border-yellow-200 rounded-2xl focus:ring-4 focus:ring-yellow-200 focus:border-yellow-500 transition-all duration-300 bg-white/80 backdrop-blur-sm shadow-lg"
                   whileFocus={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 />
@@ -251,7 +251,7 @@ export default function Home() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <button className="bg-gradient-to-r from-pink-600 to-rose-600 text-white px-8 py-3 rounded-xl hover:from-pink-700 hover:to-rose-700 transition-all duration-300 font-medium shadow-lg">
+                  <button className="bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-8 py-3 rounded-xl hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 font-medium shadow-lg">
                     Search
                   </button>
                 </motion.div>
@@ -263,7 +263,7 @@ export default function Home() {
 
       {/* Stats Section */}
       <FloatingElement delay={0.6}>
-        <div className="bg-white/60 backdrop-blur-sm border-y border-pink-100">
+        <div className="bg-white/80 backdrop-blur-sm border-y border-yellow-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               {[
@@ -282,11 +282,11 @@ export default function Home() {
                   <motion.div
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     transition={{ type: "spring", stiffness: 300 }}
-                    className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center shadow-lg"
+                    className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-full flex items-center justify-center shadow-lg"
                   >
                     <stat.icon className="w-8 h-8 text-white" />
                   </motion.div>
-                  <h3 className="text-3xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent mb-2">
+                  <h3 className="text-3xl font-bold bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent mb-2">
                     {stat.number}
                   </h3>
                   <p className="text-gray-600 font-medium">{stat.label}</p>
@@ -301,7 +301,7 @@ export default function Home() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <FloatingElement delay={0.8}>
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent mb-4">
+            <h2 className="text-5xl font-bold bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent mb-4">
               Featured Venues
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
