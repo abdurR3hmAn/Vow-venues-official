@@ -620,6 +620,39 @@ export default function Home() {
           </motion.div>
         )}
       </div>
+
+      {/* Footer Section with Feedback Link */}
+      <FloatingElement delay={1.0}>
+        <div className="bg-gradient-to-r from-yellow-500 to-amber-600 mt-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div className="text-center">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+                className="inline-block"
+              >
+                <motion.a
+                  href="/feedback"
+                  whileHover={{ y: -2 }}
+                  className="inline-flex items-center space-x-3 bg-white text-yellow-600 px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 group"
+                >
+                  <Heart className="w-5 h-5 group-hover:animate-pulse" />
+                  <span>Share Your Feedback</span>
+                  <motion.span
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    →
+                  </motion.span>
+                </motion.a>
+              </motion.div>
+              <p className="text-white/90 mt-4 text-lg">
+                Help us improve by sharing your experience
+              </p>
+            </div>
+          </div>
+        </div>
+      </FloatingElement>
     </div>
   )
 }
