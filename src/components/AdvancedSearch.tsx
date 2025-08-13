@@ -27,10 +27,12 @@ interface AdvancedSearchProps {
   venueSearchTerm: string
 }
 
-export default function AdvancedSearch({ 
-  onVenueSearch, 
-  onLocationSelect, 
-  venueSearchTerm 
+export default function AdvancedSearch({
+  venues,
+  onVenueSearch,
+  onVenueSelect,
+  onLocationSelect,
+  venueSearchTerm
 }: AdvancedSearchProps) {
   const [activeTab, setActiveTab] = useState<'venue' | 'location'>('venue')
 
