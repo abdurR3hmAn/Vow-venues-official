@@ -13,19 +13,19 @@ const FeatureCard = ({ icon: Icon, title, description, delay }: {
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay, duration: 0.6, ease: "easeOut" }}
     whileHover={{ y: -5, scale: 1.02 }}
-    className="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-pink-100 relative overflow-hidden"
+    className="group bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-yellow-200 relative overflow-hidden"
   >
-    <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 via-purple-500/5 to-rose-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+    <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 via-amber-500/5 to-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
     <motion.div
-      className="w-16 h-16 bg-gradient-to-r from-pink-500 to-rose-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg"
+      className="w-16 h-16 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg"
       whileHover={{ rotate: 10 }}
       transition={{ type: "spring", stiffness: 300 }}
     >
       <Icon className="w-8 h-8 text-white" />
     </motion.div>
 
-    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-pink-600 transition-colors duration-300">
+    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-yellow-600 transition-colors duration-300">
       {title}
     </h3>
     <p className="text-gray-600 leading-relaxed group-hover:text-gray-800 transition-colors duration-300">
@@ -42,7 +42,7 @@ const StatItem = ({ number, label, delay }: { number: string, label: string, del
     className="text-center"
   >
     <motion.div
-      className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent mb-2"
+      className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent mb-2"
       whileHover={{ scale: 1.1 }}
       transition={{ type: "spring", stiffness: 300 }}
     >
