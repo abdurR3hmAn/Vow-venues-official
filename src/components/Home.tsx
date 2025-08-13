@@ -12,6 +12,8 @@ interface Venue {
   address: string
   price: number
   email?: string
+  images?: string[]
+  featuredImage?: string
 }
 
 async function fetchVenues(): Promise<Venue[]> {
@@ -35,6 +37,9 @@ const FloatingElement = ({ children, delay = 0 }: { children: React.ReactNode, d
 const VenueCard = ({ venue, index }: { venue: Venue, index: number }) => {
   const [isHovered, setIsHovered] = useState(false)
 
+  // Default placeholder image if no image is provided
+  const imageUrl = venue.featuredImage || venue.images?.[0] || `https://images.unsplash.com/photo-1519167758481-83f29c1fe8ea?w=400&h=250&fit=crop&crop=center`
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -43,21 +48,35 @@ const VenueCard = ({ venue, index }: { venue: Venue, index: number }) => {
       whileHover={{ y: -8, scale: 1.02 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-pink-100"
+      className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-yellow-200"
     >
-      {/* Premium Badge */}
-      <div className="absolute top-4 right-4 z-10">
-        <motion.div
-          animate={{ rotate: isHovered ? 360 : 0 }}
-          transition={{ duration: 0.6 }}
-          className="bg-gradient-to-r from-amber-400 to-yellow-500 text-white p-2 rounded-full shadow-lg"
-        >
-          <Crown className="w-4 h-4" />
-        </motion.div>
-      </div>
+      {/* Featured Image */}
+      <div className="relative h-48 overflow-hidden">
+        <motion.img
+          src={imageUrl}
+          alt={venue.name}
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+          whileHover={{ scale: 1.1 }}
+          transition={{ duration: 0.7 }}
+          onError={(e) => {
+            e.currentTarget.src = 'https://images.unsplash.com/photo-1519167758481-83f29c1fe8ea?w=400&h=250&fit=crop&crop=center'
+          }}
+        />
 
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 via-purple-500/5 to-rose-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        {/* Premium Badge */}
+        <div className="absolute top-4 right-4 z-10">
+          <motion.div
+            animate={{ rotate: isHovered ? 360 : 0 }}
+            transition={{ duration: 0.6 }}
+            className="bg-gradient-to-r from-yellow-400 to-amber-500 text-white p-2 rounded-full shadow-lg"
+          >
+            <Crown className="w-4 h-4" />
+          </motion.div>
+        </div>
+
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      </div>
 
       {/* Floating Sparkles */}
       <AnimatePresence>
@@ -68,7 +87,7 @@ const VenueCard = ({ venue, index }: { venue: Venue, index: number }) => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0 }}
               transition={{ delay: 0.1 }}
-              className="absolute top-6 left-6 text-pink-400"
+              className="absolute top-6 left-6 text-yellow-400"
             >
               <Sparkles className="w-4 h-4" />
             </motion.div>
@@ -77,7 +96,7 @@ const VenueCard = ({ venue, index }: { venue: Venue, index: number }) => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0 }}
               transition={{ delay: 0.2 }}
-              className="absolute bottom-6 right-16 text-purple-400"
+              className="absolute bottom-6 right-16 text-amber-400"
             >
               <Sparkles className="w-3 h-3" />
             </motion.div>
@@ -85,28 +104,28 @@ const VenueCard = ({ venue, index }: { venue: Venue, index: number }) => {
         )}
       </AnimatePresence>
 
-      <div className="p-8">
+      <div className="p-6">
         <motion.h3
-          className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-pink-600 transition-colors duration-300"
+          className="text-xl font-bold text-gray-900 mb-3 group-hover:text-yellow-600 transition-colors duration-300"
           whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 300 }}
         >
           {venue.name}
         </motion.h3>
 
-        <div className="flex items-center text-gray-600 mb-6 group-hover:text-gray-800 transition-colors duration-300">
-          <MapPin className="w-4 h-4 mr-2 text-pink-500" />
+        <div className="flex items-center text-gray-600 mb-4 group-hover:text-gray-800 transition-colors duration-300">
+          <MapPin className="w-4 h-4 mr-2 text-yellow-500" />
           <span className="text-sm">{venue.address}</span>
         </div>
 
-        <div className="space-y-4 mb-6">
+        <div className="space-y-3 mb-6">
           <motion.div
-            className="flex items-center justify-between p-3 bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl border border-pink-100"
+            className="flex items-center justify-between p-3 bg-gradient-to-r from-yellow-50 to-amber-50 rounded-xl border border-yellow-200"
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
             <div className="flex items-center">
-              <Users className="w-5 h-5 text-pink-500 mr-2" />
+              <Users className="w-5 h-5 text-yellow-600 mr-2" />
               <span className="text-gray-600 font-medium">Capacity</span>
             </div>
             <span className="font-bold text-gray-900">{venue.capacity} guests</span>
@@ -114,12 +133,12 @@ const VenueCard = ({ venue, index }: { venue: Venue, index: number }) => {
 
           {venue.additionalMetric && (
             <motion.div
-              className="flex items-center justify-between p-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-100"
+              className="flex items-center justify-between p-3 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-xl border border-orange-200"
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
               <div className="flex items-center">
-                <Car className="w-5 h-5 text-blue-500 mr-2" />
+                <Car className="w-5 h-5 text-orange-500 mr-2" />
                 <span className="text-gray-600 font-medium">Parking</span>
               </div>
               <span className="font-bold text-gray-900">{venue.additionalMetric} cars</span>
@@ -127,13 +146,13 @@ const VenueCard = ({ venue, index }: { venue: Venue, index: number }) => {
           )}
 
           <motion.div
-            className="flex items-center justify-between p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border border-green-100"
+            className="flex items-center justify-between p-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border border-green-200"
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
             <span className="text-gray-600 font-medium">Starting Price</span>
             <div className="text-right">
-              <span className="text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+              <span className="text-xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
                 Rs. {venue.price.toLocaleString()}
               </span>
             </div>
@@ -145,7 +164,7 @@ const VenueCard = ({ venue, index }: { venue: Venue, index: number }) => {
             href={`tel:${venue.phone}`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="flex-1 flex items-center justify-center px-4 py-3 border-2 border-pink-200 text-pink-600 rounded-xl hover:bg-pink-50 transition-all duration-300 font-medium group"
+            className="flex-1 flex items-center justify-center px-4 py-3 border-2 border-yellow-200 text-yellow-600 rounded-xl hover:bg-yellow-50 transition-all duration-300 font-medium group"
           >
             <Phone className="w-4 h-4 mr-2 group-hover:animate-bounce" />
             Call Now
@@ -154,7 +173,7 @@ const VenueCard = ({ venue, index }: { venue: Venue, index: number }) => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="flex-1 bg-gradient-to-r from-pink-600 to-rose-600 text-white px-4 py-3 rounded-xl hover:from-pink-700 hover:to-rose-700 transition-all duration-300 font-medium shadow-lg hover:shadow-xl flex items-center justify-center group"
+            className="flex-1 bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-4 py-3 rounded-xl hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 font-medium shadow-lg hover:shadow-xl flex items-center justify-center group"
           >
             <Calendar className="w-4 h-4 mr-2 group-hover:animate-pulse" />
             Book Now
