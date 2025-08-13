@@ -14,6 +14,19 @@ interface Venue {
   email?: string
   images?: string[]
   featuredImage?: string
+  class: 'standard' | 'middle' | 'high'
+  latitude?: number
+  longitude?: number
+  description?: string
+  amenities?: string[]
+  contactEmail?: string
+}
+
+interface FilterState {
+  priceRange: [number, number]
+  capacityRange: [number, number]
+  venueClass: string[]
+  searchTerm: string
 }
 
 async function fetchVenues(): Promise<Venue[]> {
@@ -281,15 +294,47 @@ const VenueCard = ({ venue, index }: { venue: Venue, index: number }) => {
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('')
+  const [showFilters, setShowFilters] = useState(false)
+  const [filters, setFilters] = useState<FilterState>({
+    priceRange: [0, 2000000],
+    capacityRange: [0, 5000],
+    venueClass: [],
+    searchTerm: ''
+  })
+
   const { data: venues, isLoading, error } = useQuery({
     queryKey: ['venues'],
     queryFn: fetchVenues
   })
 
-  const filteredVenues = venues?.filter(venue =>
-    venue.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    venue.address.toLowerCase().includes(searchTerm.toLowerCase())
-  ) || []
+  const filteredVenues = venues?.filter(venue => {
+    const matchesSearch = venue.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         venue.address.toLowerCase().includes(searchTerm.toLowerCase())
+
+    const matchesPrice = venue.price >= filters.priceRange[0] && venue.price <= filters.priceRange[1]
+    const matchesCapacity = venue.capacity >= filters.capacityRange[0] && venue.capacity <= filters.capacityRange[1]
+    const matchesClass = filters.venueClass.length === 0 || filters.venueClass.includes(venue.class)
+
+    return matchesSearch && matchesPrice && matchesCapacity && matchesClass
+  }) || []
+
+  const handleClassFilter = (className: string) => {
+    setFilters(prev => ({
+      ...prev,
+      venueClass: prev.venueClass.includes(className)
+        ? prev.venueClass.filter(c => c !== className)
+        : [...prev.venueClass, className]
+    }))
+  }
+
+  const clearFilters = () => {
+    setFilters({
+      priceRange: [0, 2000000],
+      capacityRange: [0, 5000],
+      venueClass: [],
+      searchTerm: ''
+    })
+  }
 
   return (
     <div className="min-h-screen">
