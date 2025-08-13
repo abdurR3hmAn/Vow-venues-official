@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowLeft, MapPin, Users, Car, Phone, Mail, Star, Calendar, CreditCard, Navigation } from 'lucide-react'
+import InteractiveMap from './InteractiveMap'
 
 interface Venue {
   _id: string
