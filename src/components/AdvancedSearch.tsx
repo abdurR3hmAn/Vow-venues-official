@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Search, MapPin, Building2, Calendar } from 'lucide-react'
 import LocationAutocomplete from './LocationAutocomplete'
+import VenueSearch from './VenueSearch'
 
 interface AdvancedSearchProps {
   onVenueSearch: (query: string) => void
