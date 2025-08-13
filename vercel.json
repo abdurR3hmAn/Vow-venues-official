@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build",
+  "builds": [
+    {
+      "src": "server/index.ts",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["dist/**"],
+        "maxLambdaSize": "50mb"
+      }
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "MONGODB_URI": "mongodb+srv://rehansaqib:Cusit%4012926@cluster0.koi0z.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+  },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "server/index.ts"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "server/index.ts"
+    }
+  ]
+}
