@@ -36,9 +36,34 @@ const FloatingElement = ({ children, delay = 0 }: { children: React.ReactNode, d
 
 const VenueCard = ({ venue, index }: { venue: Venue, index: number }) => {
   const [isHovered, setIsHovered] = useState(false)
+  const [showBookingModal, setShowBookingModal] = useState(false)
 
   // Default placeholder image if no image is provided
   const imageUrl = venue.featuredImage || venue.images?.[0] || `https://images.unsplash.com/photo-1519167758481-83f29c1fe8ea?w=400&h=250&fit=crop&crop=center`
+
+  const handleBookNow = () => {
+    setShowBookingModal(true)
+  }
+
+  const handleWhatsAppBooking = () => {
+    const message = `Hi! I'm interested in booking ${venue.name} for my event. Could you please provide more details about availability and pricing?`
+    const whatsappUrl = `https://wa.me/${venue.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`
+    window.open(whatsappUrl, '_blank')
+    setShowBookingModal(false)
+  }
+
+  const handleEmailBooking = () => {
+    const subject = `Booking Inquiry for ${venue.name}`
+    const body = `Dear ${venue.name} Team,\n\nI am interested in booking your venue for my upcoming event. Please provide me with:\n\n- Available dates\n- Pricing packages\n- Catering options\n- Additional services\n\nVenue Details:\n- Name: ${venue.name}\n- Address: ${venue.address}\n- Capacity: ${venue.capacity} guests\n\nLooking forward to hearing from you.\n\nBest regards`
+
+    if (venue.email) {
+      window.location.href = `mailto:${venue.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    } else {
+      // Fallback to phone if no email
+      window.location.href = `tel:${venue.phone}`
+    }
+    setShowBookingModal(false)
+  }
 
   return (
     <motion.div
