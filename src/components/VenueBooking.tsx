@@ -269,58 +269,31 @@ export default function VenueBooking() {
                 </motion.button>
               </div>
 
-              {/* Google Maps */}
+              {/* Interactive Google Maps */}
               <div className="bg-white rounded-2xl shadow-lg p-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Location</h2>
-                
-                {venue.latitude && venue.longitude ? (
-                  <div className="space-y-4">
-                    <div className="h-80 bg-gray-200 rounded-xl overflow-hidden">
-                      <iframe
-                        src={`https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${venue.latitude},${venue.longitude}&zoom=15`}
-                        width="100%"
-                        height="100%"
-                        style={{ border: 0 }}
-                        allowFullScreen
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                        title={`${venue.name} Location`}
-                      />
-                    </div>
-                    <div className="flex space-x-4">
-                      <motion.a
-                        href={`https://www.google.com/maps/dir/?api=1&destination=${venue.latitude},${venue.longitude}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="flex-1 flex items-center justify-center space-x-2 bg-blue-500 text-white py-3 rounded-xl hover:bg-blue-600 transition-colors"
-                      >
-                        <Navigation className="w-4 h-4" />
-                        <span>Get Directions</span>
-                      </motion.a>
-                      <motion.a
-                        href={`https://maps.google.com/?q=${venue.latitude},${venue.longitude}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="flex-1 flex items-center justify-center space-x-2 bg-green-500 text-white py-3 rounded-xl hover:bg-green-600 transition-colors"
-                      >
-                        <MapPin className="w-4 h-4" />
-                        <span>View on Map</span>
-                      </motion.a>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="h-80 bg-gray-100 rounded-xl flex items-center justify-center">
-                    <div className="text-center text-gray-500">
-                      <MapPin className="w-12 h-12 mx-auto mb-4" />
-                      <p>Location coordinates not available</p>
-                      <p className="text-sm mt-2">Address: {venue.address}</p>
-                    </div>
-                  </div>
-                )}
+                <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                  <MapPin className="w-6 h-6 text-yellow-600 mr-2" />
+                  Location & Directions
+                </h2>
+
+                <InteractiveMap
+                  venue={{
+                    name: venue.name,
+                    latitude: venue.latitude,
+                    longitude: venue.longitude,
+                    address: venue.address
+                  }}
+                />
+
+                <div className="mt-6 p-4 bg-gray-50 rounded-xl">
+                  <h3 className="font-semibold text-gray-900 mb-2">Address</h3>
+                  <p className="text-gray-600">{venue.address}</p>
+                  {venue.latitude && venue.longitude && (
+                    <p className="text-sm text-gray-500 mt-2">
+                      Coordinates: {venue.latitude.toFixed(6)}, {venue.longitude.toFixed(6)}
+                    </p>
+                  )}
+                </div>
               </div>
             </motion.div>
           )}
