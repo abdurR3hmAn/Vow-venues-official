@@ -277,14 +277,25 @@ export default function VenueBooking() {
                   Location & Directions
                 </h2>
 
-                <InteractiveMap
-                  venue={{
-                    name: venue.name,
-                    latitude: venue.latitude,
-                    longitude: venue.longitude,
-                    address: venue.address
-                  }}
-                />
+{import.meta.env.VITE_GOOGLE_MAPS_API_KEY && import.meta.env.VITE_GOOGLE_MAPS_API_KEY !== 'YOUR_GOOGLE_MAPS_API_KEY_HERE' ? (
+                  <InteractiveMap
+                    venue={{
+                      name: venue.name,
+                      latitude: venue.latitude,
+                      longitude: venue.longitude,
+                      address: venue.address
+                    }}
+                  />
+                ) : (
+                  <StaticMapFallback
+                    venue={{
+                      name: venue.name,
+                      latitude: venue.latitude,
+                      longitude: venue.longitude,
+                      address: venue.address
+                    }}
+                  />
+                )}
 
                 <div className="mt-6 p-4 bg-gray-50 rounded-xl">
                   <h3 className="font-semibold text-gray-900 mb-2">Address</h3>
