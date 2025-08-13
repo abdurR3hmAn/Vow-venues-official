@@ -166,15 +166,20 @@ const ReviewCard = ({ review, index }: { review: Review, index: number }) => {
 
 export default function Reviews() {
   const navigate = useNavigate()
-  const [reviews, setReviews] = useState<Review[]>(mockReviews)
-  const [filteredReviews, setFilteredReviews] = useState<Review[]>(mockReviews)
+  const [filteredReviews, setFilteredReviews] = useState<Review[]>([])
   const [searchTerm, setSearchTerm] = useState('')
   const [filterRating, setFilterRating] = useState<number | null>(null)
   const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'highest' | 'lowest'>('newest')
   const [showFilters, setShowFilters] = useState(false)
 
+  // Fetch reviews data
+  const { data: reviews = [], isLoading, error } = useQuery({
+    queryKey: ['reviews'],
+    queryFn: fetchReviews
+  })
+
   // Calculate average rating
-  const averageRating = reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length
+  const averageRating = reviews.length > 0 ? reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length : 0
 
   // Filter and sort reviews
   useEffect(() => {
