@@ -331,7 +331,7 @@ export default function Home() {
               className="flex items-center space-x-2 bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-6 py-3 rounded-xl hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 font-medium shadow-lg"
             >
               <span className="text-lg">🎛️</span>
-              <span>Advanced Filters ({filteredVenues.length} venues)</span>
+              <span>Advanced Filters ({filteredVenues.length} of {venues?.length || 0} venues)</span>
             </motion.button>
 
             <AnimatePresence>
