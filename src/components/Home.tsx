@@ -76,7 +76,7 @@ const VenueCard = ({ venue, index }: { venue: Venue, index: number }) => {
       className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-yellow-200"
     >
       {/* Featured Image */}
-      <div className="relative h-48 overflow-hidden">
+      <div className="relative h-48 overflow-hidden bg-gray-100">
         <motion.img
           src={imageUrl}
           alt={venue.name}
@@ -84,7 +84,11 @@ const VenueCard = ({ venue, index }: { venue: Venue, index: number }) => {
           whileHover={{ scale: 1.1 }}
           transition={{ duration: 0.7 }}
           onError={(e) => {
+            console.log(`Failed to load image for ${venue.name}:`, imageUrl)
             e.currentTarget.src = 'https://images.unsplash.com/photo-1519167758481-83f29c1fe8ea?w=400&h=250&fit=crop&crop=center'
+          }}
+          onLoad={() => {
+            console.log(`Successfully loaded image for ${venue.name}:`, imageUrl)
           }}
         />
 
