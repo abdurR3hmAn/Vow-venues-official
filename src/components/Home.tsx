@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Search, MapPin, Users, Car, Phone, Star, Calendar, Heart, Sparkles, Crown } from 'lucide-react'
 
 interface Venue {
   _id: string
@@ -20,6 +22,149 @@ async function fetchVenues(): Promise<Venue[]> {
   return response.json()
 }
 
+const FloatingElement = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => (
+  <motion.div
+    initial={{ y: 20, opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    transition={{ delay, duration: 0.6, ease: "easeOut" }}
+  >
+    {children}
+  </motion.div>
+)
+
+const VenueCard = ({ venue, index }: { venue: Venue, index: number }) => {
+  const [isHovered, setIsHovered] = useState(false)
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.1, duration: 0.6, ease: "easeOut" }}
+      whileHover={{ y: -8, scale: 1.02 }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-pink-100"
+    >
+      {/* Premium Badge */}
+      <div className="absolute top-4 right-4 z-10">
+        <motion.div
+          animate={{ rotate: isHovered ? 360 : 0 }}
+          transition={{ duration: 0.6 }}
+          className="bg-gradient-to-r from-amber-400 to-yellow-500 text-white p-2 rounded-full shadow-lg"
+        >
+          <Crown className="w-4 h-4" />
+        </motion.div>
+      </div>
+
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 via-purple-500/5 to-rose-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+      {/* Floating Sparkles */}
+      <AnimatePresence>
+        {isHovered && (
+          <>
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0 }}
+              transition={{ delay: 0.1 }}
+              className="absolute top-6 left-6 text-pink-400"
+            >
+              <Sparkles className="w-4 h-4" />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0 }}
+              transition={{ delay: 0.2 }}
+              className="absolute bottom-6 right-16 text-purple-400"
+            >
+              <Sparkles className="w-3 h-3" />
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      <div className="p-8">
+        <motion.h3
+          className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-pink-600 transition-colors duration-300"
+          whileHover={{ scale: 1.05 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
+          {venue.name}
+        </motion.h3>
+
+        <div className="flex items-center text-gray-600 mb-6 group-hover:text-gray-800 transition-colors duration-300">
+          <MapPin className="w-4 h-4 mr-2 text-pink-500" />
+          <span className="text-sm">{venue.address}</span>
+        </div>
+
+        <div className="space-y-4 mb-6">
+          <motion.div
+            className="flex items-center justify-between p-3 bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl border border-pink-100"
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <div className="flex items-center">
+              <Users className="w-5 h-5 text-pink-500 mr-2" />
+              <span className="text-gray-600 font-medium">Capacity</span>
+            </div>
+            <span className="font-bold text-gray-900">{venue.capacity} guests</span>
+          </motion.div>
+
+          {venue.additionalMetric && (
+            <motion.div
+              className="flex items-center justify-between p-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-100"
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <div className="flex items-center">
+                <Car className="w-5 h-5 text-blue-500 mr-2" />
+                <span className="text-gray-600 font-medium">Parking</span>
+              </div>
+              <span className="font-bold text-gray-900">{venue.additionalMetric} cars</span>
+            </motion.div>
+          )}
+
+          <motion.div
+            className="flex items-center justify-between p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border border-green-100"
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <span className="text-gray-600 font-medium">Starting Price</span>
+            <div className="text-right">
+              <span className="text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                Rs. {venue.price.toLocaleString()}
+              </span>
+            </div>
+          </motion.div>
+        </div>
+
+        <div className="flex gap-3">
+          <motion.a
+            href={`tel:${venue.phone}`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex-1 flex items-center justify-center px-4 py-3 border-2 border-pink-200 text-pink-600 rounded-xl hover:bg-pink-50 transition-all duration-300 font-medium group"
+          >
+            <Phone className="w-4 h-4 mr-2 group-hover:animate-bounce" />
+            Call Now
+          </motion.a>
+
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex-1 bg-gradient-to-r from-pink-600 to-rose-600 text-white px-4 py-3 rounded-xl hover:from-pink-700 hover:to-rose-700 transition-all duration-300 font-medium shadow-lg hover:shadow-xl flex items-center justify-center group"
+          >
+            <Calendar className="w-4 h-4 mr-2 group-hover:animate-pulse" />
+            Book Now
+          </motion.button>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('')
   const { data: venues, isLoading, error } = useQuery({
@@ -33,86 +178,174 @@ export default function Home() {
   ) || []
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          Find Your Perfect Venue
-        </h1>
-        <p className="text-xl text-gray-600 mb-8">
-          Discover beautiful wedding halls and event venues in Peshawar
-        </p>
-        
-        <div className="max-w-md mx-auto">
-          <input
-            type="text"
-            placeholder="Search venues by name or location..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-          />
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <div className="relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 bg-gradient-to-br from-pink-100 via-purple-50 to-rose-100 opacity-50" />
+        <div className="absolute inset-0" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ec4899' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        }} />
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="text-center">
+            <FloatingElement>
+              <motion.h1
+                className="text-6xl md:text-7xl font-bold mb-6"
+                initial={{ scale: 0.5 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              >
+                <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-rose-600 bg-clip-text text-transparent">
+                  Find Your
+                </span>
+                <br />
+                <span className="bg-gradient-to-r from-rose-600 via-pink-600 to-purple-600 bg-clip-text text-transparent">
+                  Perfect Venue
+                </span>
+              </motion.h1>
+            </FloatingElement>
+
+            <FloatingElement delay={0.2}>
+              <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
+                Discover breathtaking wedding halls and event venues in Peshawar.
+                Create unforgettable memories in spaces designed for your special moments.
+              </p>
+            </FloatingElement>
+
+            <FloatingElement delay={0.4}>
+              <div className="max-w-2xl mx-auto relative">
+                <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
+                  <Search className="h-6 w-6 text-pink-500" />
+                </div>
+                <motion.input
+                  type="text"
+                  placeholder="Search venues by name or location..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-14 pr-6 py-5 text-lg border-2 border-pink-200 rounded-2xl focus:ring-4 focus:ring-pink-200 focus:border-pink-500 transition-all duration-300 bg-white/80 backdrop-blur-sm shadow-lg"
+                  whileFocus={{ scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                />
+                <motion.div
+                  className="absolute inset-y-0 right-0 pr-2 flex items-center"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <button className="bg-gradient-to-r from-pink-600 to-rose-600 text-white px-8 py-3 rounded-xl hover:from-pink-700 hover:to-rose-700 transition-all duration-300 font-medium shadow-lg">
+                    Search
+                  </button>
+                </motion.div>
+              </div>
+            </FloatingElement>
+          </div>
         </div>
       </div>
 
-      {isLoading && (
-        <div className="text-center py-12">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading venues...</p>
-        </div>
-      )}
-
-      {error && (
-        <div className="text-center py-12">
-          <p className="text-red-600">Error loading venues. Please try again.</p>
-        </div>
-      )}
-
-      {!isLoading && !error && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredVenues.map((venue) => (
-            <div key={venue._id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{venue.name}</h3>
-                <p className="text-gray-600 mb-4">{venue.address}</p>
-                
-                <div className="space-y-2 mb-4">
-                  <div className="flex justify-between">
-                    <span className="text-gray-500">Capacity:</span>
-                    <span className="font-medium">{venue.capacity} guests</span>
-                  </div>
-                  {venue.additionalMetric && (
-                    <div className="flex justify-between">
-                      <span className="text-gray-500">Parking:</span>
-                      <span className="font-medium">{venue.additionalMetric} cars</span>
-                    </div>
-                  )}
-                  <div className="flex justify-between">
-                    <span className="text-gray-500">Price:</span>
-                    <span className="font-medium text-pink-600">Rs. {venue.price.toLocaleString()}</span>
-                  </div>
-                </div>
-
-                <div className="flex justify-between items-center">
-                  <a
-                    href={`tel:${venue.phone}`}
-                    className="text-pink-600 hover:text-pink-700 font-medium"
+      {/* Stats Section */}
+      <FloatingElement delay={0.6}>
+        <div className="bg-white/60 backdrop-blur-sm border-y border-pink-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+              {[
+                { number: "50+", label: "Premium Venues", icon: Crown },
+                { number: "10K+", label: "Happy Couples", icon: Heart },
+                { number: "5⭐", label: "Average Rating", icon: Star },
+                { number: "24/7", label: "Support", icon: Phone },
+              ].map((stat, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8 + index * 0.1 }}
+                  className="text-center"
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center shadow-lg"
                   >
-                    📞 {venue.phone}
-                  </a>
-                  <button className="bg-pink-600 text-white px-4 py-2 rounded-md hover:bg-pink-700 transition-colors">
-                    View Details
-                  </button>
-                </div>
-              </div>
+                    <stat.icon className="w-8 h-8 text-white" />
+                  </motion.div>
+                  <h3 className="text-3xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent mb-2">
+                    {stat.number}
+                  </h3>
+                  <p className="text-gray-600 font-medium">{stat.label}</p>
+                </motion.div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
-      )}
+      </FloatingElement>
 
-      {!isLoading && !error && filteredVenues.length === 0 && (
-        <div className="text-center py-12">
-          <p className="text-gray-600">No venues found matching your search.</p>
-        </div>
-      )}
+      {/* Venues Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <FloatingElement delay={0.8}>
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent mb-4">
+              Featured Venues
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Handpicked premium venues for your special celebration
+            </p>
+          </div>
+        </FloatingElement>
+
+        {isLoading && (
+          <div className="text-center py-20">
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+              className="w-20 h-20 border-4 border-pink-200 border-t-pink-600 rounded-full mx-auto mb-6"
+            />
+            <motion.p
+              className="text-xl text-gray-600"
+              animate={{ opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              Discovering amazing venues for you...
+            </motion.p>
+          </div>
+        )}
+
+        {error && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="text-center py-20"
+          >
+            <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <span className="text-3xl">😔</span>
+            </div>
+            <p className="text-xl text-red-600 font-medium">Oops! Something went wrong</p>
+            <p className="text-gray-600 mt-2">Please try refreshing the page</p>
+          </motion.div>
+        )}
+
+        {!isLoading && !error && (
+          <AnimatePresence>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredVenues.map((venue, index) => (
+                <VenueCard key={venue._id} venue={venue} index={index} />
+              ))}
+            </div>
+          </AnimatePresence>
+        )}
+
+        {!isLoading && !error && filteredVenues.length === 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center py-20"
+          >
+            <div className="w-32 h-32 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Search className="w-12 h-12 text-gray-400" />
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">No venues found</h3>
+            <p className="text-gray-600">Try adjusting your search criteria</p>
+          </motion.div>
+        )}
+      </div>
     </div>
   )
 }
