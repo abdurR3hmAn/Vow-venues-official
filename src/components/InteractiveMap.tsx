@@ -47,6 +47,11 @@ export default function InteractiveMap({ venue }: InteractiveMapProps) {
       setIsLoading(true)
       setError(null)
 
+      // Check if API key is available
+      if (!GOOGLE_MAPS_API_KEY || GOOGLE_MAPS_API_KEY === 'demo-key') {
+        throw new Error('Google Maps API key not configured. Please set VITE_GOOGLE_MAPS_API_KEY environment variable.')
+      }
+
       const loader = new Loader({
         apiKey: GOOGLE_MAPS_API_KEY,
         version: 'weekly',
