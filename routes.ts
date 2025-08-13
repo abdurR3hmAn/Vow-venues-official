@@ -59,6 +59,42 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Feedback endpoint
+  app.post("/api/feedback", async (req, res) => {
+    try {
+      const feedbackData = req.body;
+
+      // Log feedback data (in production, you'd save to database)
+      console.log('Feedback received:', {
+        timestamp: new Date().toISOString(),
+        name: feedbackData.name,
+        email: feedbackData.email,
+        type: feedbackData.feedbackType,
+        rating: feedbackData.rating,
+        subject: feedbackData.subject,
+        wouldRecommend: feedbackData.wouldRecommend
+      });
+
+      // In a real application, you would:
+      // 1. Validate the feedback data
+      // 2. Save to database
+      // 3. Send confirmation email
+      // 4. Trigger notifications to admin team
+
+      res.json({
+        success: true,
+        message: "Feedback submitted successfully",
+        id: `feedback_${Date.now()}`
+      });
+    } catch (error) {
+      console.error('Error processing feedback:', error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to submit feedback"
+      });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
