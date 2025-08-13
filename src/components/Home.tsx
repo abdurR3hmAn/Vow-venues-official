@@ -401,8 +401,25 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Stats Section */}
+      {/* Filter Panel */}
       <FloatingElement delay={0.6}>
+        <div className="bg-white/90 backdrop-blur-sm border-y border-yellow-200 py-6">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.button
+              onClick={() => setShowFilters(!showFilters)}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex items-center space-x-2 bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-6 py-3 rounded-xl hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 font-medium shadow-lg"
+            >
+              <span className="text-lg">🎛️</span>
+              <span>Advanced Filters ({filteredVenues.length} venues)</span>
+            </motion.button>
+          </div>
+        </div>
+      </FloatingElement>
+
+      {/* Stats Section */}
+      <FloatingElement delay={0.7}>
         <div className="bg-white/80 backdrop-blur-sm border-y border-yellow-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
