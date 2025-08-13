@@ -30,13 +30,13 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
       {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-pink-100 via-purple-50 to-rose-100" />
+      <div className="absolute inset-0 bg-gradient-to-br from-yellow-100 via-white to-amber-100" />
 
       {/* Floating Hearts Animation */}
       {[...Array(6)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute text-pink-300"
+          className="absolute text-yellow-300"
           initial={{ y: "100vh", x: Math.random() * window.innerWidth }}
           animate={{
             y: "-100vh",
@@ -60,10 +60,10 @@ export default function Login() {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="relative w-full max-w-md"
       >
-        <div className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl p-8 border border-pink-100 relative overflow-hidden">
+        <div className="bg-white/90 backdrop-blur-lg rounded-3xl shadow-2xl p-8 border border-yellow-200 relative overflow-hidden">
           {/* Decorative Elements */}
-          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full -translate-y-16 translate-x-16 opacity-10" />
-          <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-rose-400 to-pink-500 rounded-full translate-y-12 -translate-x-12 opacity-10" />
+          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full -translate-y-16 translate-x-16 opacity-10" />
+          <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-amber-400 to-yellow-500 rounded-full translate-y-12 -translate-x-12 opacity-10" />
 
           {/* Header */}
           <motion.div
@@ -73,13 +73,13 @@ export default function Login() {
             transition={{ delay: 0.2, duration: 0.6 }}
           >
             <motion.div
-              className="w-20 h-20 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg"
+              className="w-20 h-20 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg"
               whileHover={{ scale: 1.1, rotate: 10 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
               <Heart className="w-10 h-10 text-white fill-current" />
             </motion.div>
-            <h2 className="text-3xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent mb-2">
+            <h2 className="text-3xl font-bold bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent mb-2">
               Welcome Back
             </h2>
             <p className="text-gray-600">Sign in to your Vow Venues account</p>
@@ -101,7 +101,7 @@ export default function Login() {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <User className="h-5 w-5 text-pink-400" />
+                  <User className="h-5 w-5 text-yellow-500" />
                 </div>
                 <input
                   type="text"
@@ -110,7 +110,7 @@ export default function Login() {
                   value={formData.username}
                   onChange={handleChange}
                   required
-                  className="w-full pl-12 pr-4 py-4 border-2 border-pink-200 rounded-xl focus:ring-4 focus:ring-pink-200 focus:border-pink-500 transition-all duration-300 bg-white/50 backdrop-blur-sm"
+                  className="w-full pl-12 pr-4 py-4 border-2 border-yellow-200 rounded-xl focus:ring-4 focus:ring-yellow-200 focus:border-yellow-500 transition-all duration-300 bg-white/60 backdrop-blur-sm"
                   placeholder="Enter your username"
                 />
               </div>
@@ -125,7 +125,7 @@ export default function Login() {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-pink-400" />
+                  <Lock className="h-5 w-5 text-yellow-500" />
                 </div>
                 <input
                   type={showPassword ? "text" : "password"}
@@ -134,13 +134,13 @@ export default function Login() {
                   value={formData.password}
                   onChange={handleChange}
                   required
-                  className="w-full pl-12 pr-12 py-4 border-2 border-pink-200 rounded-xl focus:ring-4 focus:ring-pink-200 focus:border-pink-500 transition-all duration-300 bg-white/50 backdrop-blur-sm"
+                  className="w-full pl-12 pr-12 py-4 border-2 border-yellow-200 rounded-xl focus:ring-4 focus:ring-yellow-200 focus:border-yellow-500 transition-all duration-300 bg-white/60 backdrop-blur-sm"
                   placeholder="Enter your password"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-pink-400 hover:text-pink-600"
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-yellow-500 hover:text-yellow-600"
                 >
                   {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
@@ -153,7 +153,7 @@ export default function Login() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="w-full bg-gradient-to-r from-pink-600 to-rose-600 text-white py-4 px-6 rounded-xl hover:from-pink-700 hover:to-rose-700 transition-all duration-300 font-medium shadow-lg hover:shadow-xl flex items-center justify-center relative overflow-hidden"
+              className="w-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white py-4 px-6 rounded-xl hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 font-medium shadow-lg hover:shadow-xl flex items-center justify-center relative overflow-hidden"
             >
               {isLoading ? (
                 <>
@@ -183,19 +183,19 @@ export default function Login() {
               Don't have an account?{' '}
               <motion.a
                 href="#"
-                className="text-pink-600 hover:text-pink-700 font-medium relative group"
+                className="text-yellow-600 hover:text-yellow-700 font-medium relative group"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 Sign up now
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-500 to-rose-500 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-500 to-amber-500 group-hover:w-full transition-all duration-300"></span>
               </motion.a>
             </p>
 
             <div className="mt-6 flex items-center justify-center space-x-4 text-sm text-gray-500">
               <motion.a
                 href="#"
-                className="hover:text-pink-600 transition-colors"
+                className="hover:text-yellow-600 transition-colors"
                 whileHover={{ y: -2 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
@@ -204,7 +204,7 @@ export default function Login() {
               <span>•</span>
               <motion.a
                 href="#"
-                className="hover:text-pink-600 transition-colors"
+                className="hover:text-yellow-600 transition-colors"
                 whileHover={{ y: -2 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
