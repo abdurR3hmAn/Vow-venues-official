@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { Search, MapPin, Users, Car, Phone, Star, Calendar, Heart, Sparkles, Crown } from 'lucide-react'
 import AdvancedSearch from './AdvancedSearch'
+import DualRangeSlider from './DualRangeSlider'
 
 interface Venue {
   _id: string
