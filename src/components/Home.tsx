@@ -299,17 +299,16 @@ export default function Home() {
             </FloatingElement>
 
             <FloatingElement delay={0.4}>
-              <div className="max-w-2xl mx-auto">
-                <LocationAutocomplete
-                  placeholder="Search venues by name or location..."
-                  initialValue={searchTerm}
-                  onLocationSelect={(location) => {
-                    setSearchTerm(location.fullText)
-                    // You could also implement location-based filtering here
-                    console.log('Selected location:', location)
-                  }}
-                />
-              </div>
+              <AdvancedSearch
+                venueSearchTerm={searchTerm}
+                onVenueSearch={(query) => setSearchTerm(query)}
+                onLocationSelect={(location) => {
+                  // Implement location-based venue filtering
+                  console.log('Selected location:', location)
+                  // For now, we'll just show all venues but you could filter by location
+                  // setLocationFilter(location)
+                }}
+              />
             </FloatingElement>
           </div>
         </div>
