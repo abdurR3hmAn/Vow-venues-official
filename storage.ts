@@ -1,6 +1,6 @@
 import { User } from './models/user';
 import { Venue } from './models/venue';
-import { type InsertUser, type InsertVenue, type IVenue, type IUser } from "../shared/schema";
+import { type InsertUser, type InsertVenue, type IVenue, type IUser } from "./schema";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import mongoose from "mongoose";
