@@ -347,84 +347,28 @@ export default function Home() {
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
                       {/* Price Range Filter */}
-                      <div className="space-y-4">
-                        <h3 className="text-lg font-semibold text-gray-900 flex items-center">
-                          <span className="mr-2">💰</span>
-                          Price Range
-                        </h3>
-                        <div className="space-y-3">
-                          <div className="flex justify-between text-sm text-gray-600">
-                            <span>Rs. {filters.priceRange[0].toLocaleString()}</span>
-                            <span>Rs. {filters.priceRange[1].toLocaleString()}</span>
-                          </div>
-                          <div className="relative">
-                            <input
-                              type="range"
-                              min="0"
-                              max="2000000"
-                              step="10000"
-                              value={filters.priceRange[0]}
-                              onChange={(e) => setFilters(prev => ({
-                                ...prev,
-                                priceRange: [parseInt(e.target.value), prev.priceRange[1]]
-                              }))}
-                              className="absolute w-full h-2 bg-yellow-200 rounded-lg appearance-none cursor-pointer slider"
-                            />
-                            <input
-                              type="range"
-                              min="0"
-                              max="2000000"
-                              step="10000"
-                              value={filters.priceRange[1]}
-                              onChange={(e) => setFilters(prev => ({
-                                ...prev,
-                                priceRange: [prev.priceRange[0], parseInt(e.target.value)]
-                              }))}
-                              className="absolute w-full h-2 bg-yellow-200 rounded-lg appearance-none cursor-pointer slider"
-                            />
-                          </div>
-                        </div>
-                      </div>
+                      <DualRangeSlider
+                        min={0}
+                        max={2000000}
+                        step={10000}
+                        value={filters.priceRange}
+                        onChange={(value) => setFilters(prev => ({ ...prev, priceRange: value }))}
+                        formatValue={(value) => `Rs. ${value.toLocaleString()}`}
+                        label="Price Range"
+                        icon="💰"
+                      />
 
                       {/* Capacity Range Filter */}
-                      <div className="space-y-4">
-                        <h3 className="text-lg font-semibold text-gray-900 flex items-center">
-                          <span className="mr-2">👥</span>
-                          Capacity
-                        </h3>
-                        <div className="space-y-3">
-                          <div className="flex justify-between text-sm text-gray-600">
-                            <span>{filters.capacityRange[0]} guests</span>
-                            <span>{filters.capacityRange[1]} guests</span>
-                          </div>
-                          <div className="relative">
-                            <input
-                              type="range"
-                              min="0"
-                              max="5000"
-                              step="50"
-                              value={filters.capacityRange[0]}
-                              onChange={(e) => setFilters(prev => ({
-                                ...prev,
-                                capacityRange: [parseInt(e.target.value), prev.capacityRange[1]]
-                              }))}
-                              className="absolute w-full h-2 bg-yellow-200 rounded-lg appearance-none cursor-pointer slider"
-                            />
-                            <input
-                              type="range"
-                              min="0"
-                              max="5000"
-                              step="50"
-                              value={filters.capacityRange[1]}
-                              onChange={(e) => setFilters(prev => ({
-                                ...prev,
-                                capacityRange: [prev.capacityRange[0], parseInt(e.target.value)]
-                              }))}
-                              className="absolute w-full h-2 bg-yellow-200 rounded-lg appearance-none cursor-pointer slider"
-                            />
-                          </div>
-                        </div>
-                      </div>
+                      <DualRangeSlider
+                        min={0}
+                        max={5000}
+                        step={50}
+                        value={filters.capacityRange}
+                        onChange={(value) => setFilters(prev => ({ ...prev, capacityRange: value }))}
+                        formatValue={(value) => `${value} guests`}
+                        label="Capacity"
+                        icon="👥"
+                      />
 
                       {/* Venue Class Filter */}
                       <div className="space-y-4">
