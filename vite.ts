@@ -26,7 +26,7 @@ export async function setupVite(app: Express, server: Server) {
     allowedHosts: true,
   } as const;
 
-  const { createServer: createViteServer } = await import('vite');
+  const vite = await import('vite');
 
   // Serve static files from the client/public directory
   app.use(express.static(path.resolve(__dirname, "..", "client", "public")));
@@ -43,7 +43,7 @@ export async function setupVite(app: Express, server: Server) {
 
   // Note: API routes are handled by the main routes.ts file, not duplicated here
 
-  const vite = await createViteServer({
+  const viteServer = await vite.createServer({
     // Let Vite load the config file itself (ESM) to avoid CJS transform and top-level await issues
     configFile: path.resolve(__dirname, "..", "vite.config.ts"),
     logLevel: 'info',
@@ -51,20 +51,20 @@ export async function setupVite(app: Express, server: Server) {
     appType: "custom",
   });
 
-  app.use(vite.middlewares);
+  app.use(viteServer.middlewares);
   app.use("*", async (req, res, next) => {
     const url = req.originalUrl;
     try {
-      const clientTemplate = path.resolve(__dirname, "..", "client", "index.html");
+      const clientTemplate = path.resolve(__dirname, "index.html");
       let template = await fs.promises.readFile(clientTemplate, "utf-8");
       template = template.replace(
         `src="/src/main.tsx"`,
         `src="/src/main.tsx?v=${nanoid()}"`,
       );
-      const page = await vite.transformIndexHtml(url, template);
+      const page = await viteServer.transformIndexHtml(url, template);
       res.status(200).set({ "Content-Type": "text/html" }).end(page);
     } catch (e: any) {
-      vite.ssrFixStacktrace(e as Error);
+      viteServer.ssrFixStacktrace(e as Error);
       next(e);
     }
   });
