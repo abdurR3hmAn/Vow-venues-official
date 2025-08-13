@@ -7,6 +7,7 @@ import Home from './components/Home'
 import Login from './components/Login'
 import About from './components/About'
 import VenueBooking from './components/VenueBooking'
+import Feedback from './components/Feedback'
 
 const queryClient = new QueryClient()
 
