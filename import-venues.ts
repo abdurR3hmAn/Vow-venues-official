@@ -7,7 +7,7 @@ export async function importVenues() {
     // Do not clear existing venues automatically to avoid data loss
     // If you need to reset, clear explicitly elsewhere
 
-    const filePath = path.join(__dirname, "..", "attached_assets", "halls.txt");
+    const filePath = path.join(__dirname, "halls.txt");
     const data = await fs.promises.readFile(filePath, 'utf8');
     const lines = data.split('\n').filter(Boolean);
 
