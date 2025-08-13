@@ -26,7 +26,7 @@ export async function setupVite(app: Express, server: Server) {
     allowedHosts: true,
   } as const;
 
-  const vite = await import('vite');
+  const { createServer } = await import('vite');
 
   // Serve static files from the client/public directory
   app.use(express.static(path.resolve(__dirname, "..", "client", "public")));
@@ -43,7 +43,7 @@ export async function setupVite(app: Express, server: Server) {
 
   // Note: API routes are handled by the main routes.ts file, not duplicated here
 
-  const viteServer = await vite.createServer({
+  const viteServer = await createServer({
     // Let Vite load the config file itself (ESM) to avoid CJS transform and top-level await issues
     configFile: path.resolve(__dirname, "vite.config.ts"),
     logLevel: 'info',
