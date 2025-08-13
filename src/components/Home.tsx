@@ -235,15 +235,36 @@ export default function Home() {
   })
 
   const filteredVenues = venues?.filter(venue => {
-    const matchesSearch = venue.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    const matchesSearch = searchTerm === '' ||
+                         venue.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          venue.address.toLowerCase().includes(searchTerm.toLowerCase())
 
     const matchesPrice = venue.price >= filters.priceRange[0] && venue.price <= filters.priceRange[1]
     const matchesCapacity = venue.capacity >= filters.capacityRange[0] && venue.capacity <= filters.capacityRange[1]
     const matchesClass = filters.venueClass.length === 0 || filters.venueClass.includes(venue.class)
 
+    // Debug logging
+    if (venue.name === 'Elite Royale Wedding Palace') {
+      console.log('Filtering venue:', venue.name, {
+        venue: { price: venue.price, capacity: venue.capacity, class: venue.class },
+        filters: {
+          priceRange: filters.priceRange,
+          capacityRange: filters.capacityRange,
+          venueClass: filters.venueClass,
+          searchTerm
+        },
+        matches: { matchesSearch, matchesPrice, matchesCapacity, matchesClass },
+        finalResult: matchesSearch && matchesPrice && matchesCapacity && matchesClass
+      })
+    }
+
     return matchesSearch && matchesPrice && matchesCapacity && matchesClass
   }) || []
+
+  // Debug logging for venue data
+  console.log('Total venues:', venues?.length || 0)
+  console.log('Filtered venues:', filteredVenues.length)
+  console.log('Current filters:', filters)
 
   const handleClassFilter = (className: string) => {
     setFilters(prev => ({
