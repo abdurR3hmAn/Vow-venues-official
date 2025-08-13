@@ -339,6 +339,156 @@ export default function Home() {
               <span className="text-lg">🎛️</span>
               <span>Advanced Filters ({filteredVenues.length} venues)</span>
             </motion.button>
+
+            <AnimatePresence>
+              {showFilters && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="mt-6 overflow-hidden"
+                >
+                  <div className="bg-white rounded-2xl p-6 shadow-lg border border-yellow-200">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                      {/* Price Range Filter */}
+                      <div className="space-y-4">
+                        <h3 className="text-lg font-semibold text-gray-900 flex items-center">
+                          <span className="mr-2">💰</span>
+                          Price Range
+                        </h3>
+                        <div className="space-y-3">
+                          <div className="flex justify-between text-sm text-gray-600">
+                            <span>Rs. {filters.priceRange[0].toLocaleString()}</span>
+                            <span>Rs. {filters.priceRange[1].toLocaleString()}</span>
+                          </div>
+                          <div className="relative">
+                            <input
+                              type="range"
+                              min="0"
+                              max="2000000"
+                              step="10000"
+                              value={filters.priceRange[0]}
+                              onChange={(e) => setFilters(prev => ({
+                                ...prev,
+                                priceRange: [parseInt(e.target.value), prev.priceRange[1]]
+                              }))}
+                              className="absolute w-full h-2 bg-yellow-200 rounded-lg appearance-none cursor-pointer slider"
+                            />
+                            <input
+                              type="range"
+                              min="0"
+                              max="2000000"
+                              step="10000"
+                              value={filters.priceRange[1]}
+                              onChange={(e) => setFilters(prev => ({
+                                ...prev,
+                                priceRange: [prev.priceRange[0], parseInt(e.target.value)]
+                              }))}
+                              className="absolute w-full h-2 bg-yellow-200 rounded-lg appearance-none cursor-pointer slider"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Capacity Range Filter */}
+                      <div className="space-y-4">
+                        <h3 className="text-lg font-semibold text-gray-900 flex items-center">
+                          <span className="mr-2">👥</span>
+                          Capacity
+                        </h3>
+                        <div className="space-y-3">
+                          <div className="flex justify-between text-sm text-gray-600">
+                            <span>{filters.capacityRange[0]} guests</span>
+                            <span>{filters.capacityRange[1]} guests</span>
+                          </div>
+                          <div className="relative">
+                            <input
+                              type="range"
+                              min="0"
+                              max="5000"
+                              step="50"
+                              value={filters.capacityRange[0]}
+                              onChange={(e) => setFilters(prev => ({
+                                ...prev,
+                                capacityRange: [parseInt(e.target.value), prev.capacityRange[1]]
+                              }))}
+                              className="absolute w-full h-2 bg-yellow-200 rounded-lg appearance-none cursor-pointer slider"
+                            />
+                            <input
+                              type="range"
+                              min="0"
+                              max="5000"
+                              step="50"
+                              value={filters.capacityRange[1]}
+                              onChange={(e) => setFilters(prev => ({
+                                ...prev,
+                                capacityRange: [prev.capacityRange[0], parseInt(e.target.value)]
+                              }))}
+                              className="absolute w-full h-2 bg-yellow-200 rounded-lg appearance-none cursor-pointer slider"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Venue Class Filter */}
+                      <div className="space-y-4">
+                        <h3 className="text-lg font-semibold text-gray-900 flex items-center">
+                          <span className="mr-2">⭐</span>
+                          Venue Class
+                        </h3>
+                        <div className="space-y-2">
+                          {[
+                            { value: 'high', label: 'Premium', emoji: '👑', color: 'from-purple-500 to-pink-500' },
+                            { value: 'middle', label: 'Executive', emoji: '💎', color: 'from-blue-500 to-indigo-500' },
+                            { value: 'standard', label: 'Standard', emoji: '⭐', color: 'from-green-500 to-teal-500' }
+                          ].map((classType) => (
+                            <motion.button
+                              key={classType.value}
+                              whileHover={{ scale: 1.02 }}
+                              whileTap={{ scale: 0.98 }}
+                              onClick={() => handleClassFilter(classType.value)}
+                              className={`w-full flex items-center justify-between p-3 rounded-xl border-2 transition-all duration-300 ${
+                                filters.venueClass.includes(classType.value)
+                                  ? `bg-gradient-to-r ${classType.color} text-white border-transparent shadow-lg`
+                                  : 'bg-white border-gray-200 text-gray-700 hover:border-yellow-300 hover:bg-yellow-50'
+                              }`}
+                            >
+                              <div className="flex items-center">
+                                <span className="mr-3 text-lg">{classType.emoji}</span>
+                                <span className="font-medium">{classType.label}</span>
+                              </div>
+                              {filters.venueClass.includes(classType.value) && (
+                                <motion.span
+                                  initial={{ scale: 0 }}
+                                  animate={{ scale: 1 }}
+                                  className="text-white font-bold"
+                                >
+                                  ✓
+                                </motion.span>
+                              )}
+                            </motion.button>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Clear Filters Button */}
+                    <div className="mt-6 flex justify-center">
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={clearFilters}
+                        className="px-6 py-2 border-2 border-yellow-200 text-yellow-600 rounded-xl hover:bg-yellow-50 transition-all duration-300 font-medium"
+                      >
+                        Clear All Filters
+                      </motion.button>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </FloatingElement>
