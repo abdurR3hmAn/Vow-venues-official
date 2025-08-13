@@ -299,28 +299,16 @@ export default function Home() {
             </FloatingElement>
 
             <FloatingElement delay={0.4}>
-              <div className="max-w-2xl mx-auto relative">
-                <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
-                  <Search className="h-6 w-6 text-yellow-500" />
-                </div>
-                <motion.input
-                  type="text"
+              <div className="max-w-2xl mx-auto">
+                <LocationAutocomplete
                   placeholder="Search venues by name or location..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-14 pr-6 py-5 text-lg border-2 border-yellow-200 rounded-2xl focus:ring-4 focus:ring-yellow-200 focus:border-yellow-500 transition-all duration-300 bg-white/80 backdrop-blur-sm shadow-lg"
-                  whileFocus={{ scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  initialValue={searchTerm}
+                  onLocationSelect={(location) => {
+                    setSearchTerm(location.fullText)
+                    // You could also implement location-based filtering here
+                    console.log('Selected location:', location)
+                  }}
                 />
-                <motion.div
-                  className="absolute inset-y-0 right-0 pr-2 flex items-center"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <button className="bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-8 py-3 rounded-xl hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 font-medium shadow-lg">
-                    Search
-                  </button>
-                </motion.div>
               </div>
             </FloatingElement>
           </div>
