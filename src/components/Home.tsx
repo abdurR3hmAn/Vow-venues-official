@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import { Search, MapPin, Users, Car, Phone, Star, Calendar, Heart, Sparkles, Crown } from 'lucide-react'
 
 interface Venue {
@@ -49,33 +50,28 @@ const FloatingElement = ({ children, delay = 0 }: { children: React.ReactNode, d
 
 const VenueCard = ({ venue, index }: { venue: Venue, index: number }) => {
   const [isHovered, setIsHovered] = useState(false)
-  const [showBookingModal, setShowBookingModal] = useState(false)
+  const navigate = useNavigate()
 
   // Default placeholder image if no image is provided
   const imageUrl = venue.featuredImage || venue.images?.[0] || `https://images.unsplash.com/photo-1519167758481-83f29c1fe8ea?w=400&h=250&fit=crop&crop=center`
 
   const handleBookNow = () => {
-    setShowBookingModal(true)
+    navigate(`/venue/${venue._id}`)
   }
 
-  const handleWhatsAppBooking = () => {
-    const message = `Hi! I'm interested in booking ${venue.name} for my event. Could you please provide more details about availability and pricing?`
-    const whatsappUrl = `https://wa.me/${venue.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`
-    window.open(whatsappUrl, '_blank')
-    setShowBookingModal(false)
-  }
-
-  const handleEmailBooking = () => {
-    const subject = `Booking Inquiry for ${venue.name}`
-    const body = `Dear ${venue.name} Team,\n\nI am interested in booking your venue for my upcoming event. Please provide me with:\n\n- Available dates\n- Pricing packages\n- Catering options\n- Additional services\n\nVenue Details:\n- Name: ${venue.name}\n- Address: ${venue.address}\n- Capacity: ${venue.capacity} guests\n\nLooking forward to hearing from you.\n\nBest regards`
-
-    if (venue.email) {
-      window.location.href = `mailto:${venue.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
-    } else {
-      // Fallback to phone if no email
-      window.location.href = `tel:${venue.phone}`
+  const getClassBadge = (venueClass: string) => {
+    const badges = {
+      high: { emoji: '👑', label: 'Premium', color: 'from-purple-500 to-pink-500' },
+      middle: { emoji: '💎', label: 'Executive', color: 'from-blue-500 to-indigo-500' },
+      standard: { emoji: '⭐', label: 'Standard', color: 'from-green-500 to-teal-500' }
     }
-    setShowBookingModal(false)
+    const badge = badges[venueClass as keyof typeof badges] || badges.standard
+    return (
+      <span className={`inline-flex items-center px-2 py-1 rounded-full text-white text-xs font-medium bg-gradient-to-r ${badge.color}`}>
+        <span className="mr-1">{badge.emoji}</span>
+        {badge.label}
+      </span>
+    )
   }
 
   return (
