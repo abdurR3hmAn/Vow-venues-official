@@ -29,13 +29,13 @@ function App() {
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <Link to="/" className="flex items-center space-x-2">
+                  <Link to="/" className="flex items-center space-x-3">
                     <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                      className="w-10 h-10 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-full flex items-center justify-center"
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                      className="w-12 h-12 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-xl flex items-center justify-center shadow-lg"
                     >
-                      <Heart className="w-5 h-5 text-white fill-current" />
+                      <span className="text-2xl font-bold text-white">VV</span>
                     </motion.div>
                     <span className="text-3xl font-bold bg-gradient-to-r from-yellow-600 via-amber-600 to-orange-600 bg-clip-text text-transparent">
                       Vow Venues
