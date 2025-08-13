@@ -196,6 +196,7 @@ const VenueCard = ({ venue, index }: { venue: Venue, index: number }) => {
           </motion.a>
 
           <motion.button
+            onClick={handleBookNow}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="flex-1 bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-4 py-3 rounded-xl hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 font-medium shadow-lg hover:shadow-xl flex items-center justify-center group"
@@ -205,6 +206,71 @@ const VenueCard = ({ venue, index }: { venue: Venue, index: number }) => {
           </motion.button>
         </div>
       </div>
+
+      {/* Booking Modal */}
+      <AnimatePresence>
+        {showBookingModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+            onClick={() => setShowBookingModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="text-center mb-6">
+                <motion.div
+                  className="w-16 h-16 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-full flex items-center justify-center mx-auto mb-4"
+                  whileHover={{ scale: 1.1, rotate: 10 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <Calendar className="w-8 h-8 text-white" />
+                </motion.div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Book {venue.name}</h3>
+                <p className="text-gray-600">Choose how you'd like to make your booking</p>
+              </div>
+
+              <div className="space-y-4">
+                <motion.button
+                  onClick={handleWhatsAppBooking}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full bg-green-500 text-white px-6 py-4 rounded-xl hover:bg-green-600 transition-all duration-300 font-medium shadow-lg flex items-center justify-center space-x-3"
+                >
+                  <span className="text-xl">📱</span>
+                  <span>Book via WhatsApp</span>
+                </motion.button>
+
+                <motion.button
+                  onClick={handleEmailBooking}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full bg-blue-500 text-white px-6 py-4 rounded-xl hover:bg-blue-600 transition-all duration-300 font-medium shadow-lg flex items-center justify-center space-x-3"
+                >
+                  <span className="text-xl">📧</span>
+                  <span>{venue.email ? 'Book via Email' : 'Call to Book'}</span>
+                </motion.button>
+
+                <motion.button
+                  onClick={() => setShowBookingModal(false)}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full bg-gray-200 text-gray-700 px-6 py-3 rounded-xl hover:bg-gray-300 transition-all duration-300 font-medium"
+                >
+                  Cancel
+                </motion.button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   )
 }
