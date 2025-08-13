@@ -381,7 +381,24 @@ export default function Reviews() {
         {/* Reviews Grid */}
         <FloatingElement delay={0.5}>
           <div className="space-y-6">
-            {filteredReviews.length > 0 ? (
+            {isLoading ? (
+              <div className="text-center py-20">
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                  className="w-20 h-20 border-4 border-yellow-200 border-t-yellow-600 rounded-full mx-auto mb-6"
+                />
+                <p className="text-xl text-gray-600">Loading reviews...</p>
+              </div>
+            ) : error ? (
+              <div className="text-center py-20">
+                <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <span className="text-3xl">😔</span>
+                </div>
+                <h3 className="text-xl font-semibold text-red-600 mb-2">Failed to load reviews</h3>
+                <p className="text-gray-500">Please try refreshing the page</p>
+              </div>
+            ) : filteredReviews.length > 0 ? (
               filteredReviews.map((review, index) => (
                 <ReviewCard key={review.id} review={review} index={index} />
               ))
@@ -389,7 +406,9 @@ export default function Reviews() {
               <div className="text-center py-12">
                 <MessageCircle className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-gray-700 mb-2">No reviews found</h3>
-                <p className="text-gray-500">Try adjusting your search or filters</p>
+                <p className="text-gray-500">
+                  {reviews.length === 0 ? 'No reviews yet. Be the first to write one!' : 'Try adjusting your search or filters'}
+                </p>
               </div>
             )}
           </div>
