@@ -300,8 +300,13 @@ export default function Home() {
 
             <FloatingElement delay={0.4}>
               <AdvancedSearch
+                venues={venues || []}
                 venueSearchTerm={searchTerm}
                 onVenueSearch={(query) => setSearchTerm(query)}
+                onVenueSelect={(venue) => {
+                  // Navigate to the selected venue
+                  navigate(`/venue/${venue._id}`)
+                }}
                 onLocationSelect={(location) => {
                   // Implement location-based venue filtering
                   console.log('Selected location:', location)
