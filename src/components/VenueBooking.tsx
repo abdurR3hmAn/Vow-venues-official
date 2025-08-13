@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowLeft, MapPin, Users, Car, Phone, Mail, Star, Calendar, CreditCard, Navigation } from 'lucide-react'
 import InteractiveMap from './InteractiveMap'
+import StaticMapFallback from './StaticMapFallback'
 
 interface Venue {
   _id: string
