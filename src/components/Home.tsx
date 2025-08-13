@@ -368,7 +368,7 @@ export default function Home() {
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
                       {/* Price Range Filter */}
-                      <DualRangeSlider
+                      <SimpleRangeFilter
                         min={0}
                         max={2000000}
                         step={10000}
@@ -380,7 +380,7 @@ export default function Home() {
                       />
 
                       {/* Capacity Range Filter */}
-                      <DualRangeSlider
+                      <SimpleRangeFilter
                         min={0}
                         max={5000}
                         step={50}
