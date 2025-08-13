@@ -4,8 +4,20 @@ import { Search, MapPin, Building2, Calendar } from 'lucide-react'
 import LocationAutocomplete from './LocationAutocomplete'
 import VenueSearch from './VenueSearch'
 
+interface Venue {
+  _id: string
+  name: string
+  capacity: number
+  address: string
+  price: number
+  class: 'standard' | 'middle' | 'high'
+  amenities?: string[]
+}
+
 interface AdvancedSearchProps {
+  venues: Venue[]
   onVenueSearch: (query: string) => void
+  onVenueSelect: (venue: Venue) => void
   onLocationSelect: (location: {
     placeId: string
     mainText: string
