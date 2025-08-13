@@ -45,7 +45,7 @@ export async function setupVite(app: Express, server: Server) {
 
   const viteServer = await vite.createServer({
     // Let Vite load the config file itself (ESM) to avoid CJS transform and top-level await issues
-    configFile: path.resolve(__dirname, "..", "vite.config.ts"),
+    configFile: path.resolve(__dirname, "vite.config.ts"),
     logLevel: 'info',
     server: serverOptions,
     appType: "custom",
