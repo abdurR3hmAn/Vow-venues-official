@@ -34,6 +34,7 @@ export default function DualRangeSlider({
     const newValue: [number, number] = [Math.min(newMin, localValue[1]), localValue[1]]
     setLocalValue(newValue)
     onChange(newValue)
+    console.log('Min changed:', newValue)
   }
 
   const handleMaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,6 +42,7 @@ export default function DualRangeSlider({
     const newValue: [number, number] = [localValue[0], Math.max(newMax, localValue[0])]
     setLocalValue(newValue)
     onChange(newValue)
+    console.log('Max changed:', newValue)
   }
 
   const getPercentage = (value: number) => {
