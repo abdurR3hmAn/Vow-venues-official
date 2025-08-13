@@ -56,9 +56,9 @@ export default function About() {
   return (
     <div className="min-h-screen relative overflow-hidden">
       {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-pink-50 via-purple-50 to-rose-50" />
+      <div className="absolute inset-0 bg-gradient-to-br from-yellow-50 via-white to-amber-50" />
       <div className="absolute inset-0" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ec4899' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f59e0b' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
       }} />
 
       {/* Hero Section */}
@@ -70,10 +70,10 @@ export default function About() {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <motion.div
-            className="w-24 h-24 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center mx-auto mb-8 shadow-2xl"
+            className="w-24 h-24 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-full flex items-center justify-center mx-auto mb-8 shadow-2xl"
             whileHover={{ scale: 1.1, rotate: 10 }}
             animate={{
-              boxShadow: ["0 0 0 0 rgba(236, 72, 153, 0.4)", "0 0 0 20px rgba(236, 72, 153, 0)", "0 0 0 0 rgba(236, 72, 153, 0)"]
+              boxShadow: ["0 0 0 0 rgba(245, 158, 11, 0.4)", "0 0 0 20px rgba(245, 158, 11, 0)", "0 0 0 0 rgba(245, 158, 11, 0)"]
             }}
             transition={{
               scale: { type: "spring", stiffness: 300 },
@@ -84,7 +84,7 @@ export default function About() {
           </motion.div>
 
           <h1 className="text-5xl md:text-7xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-rose-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-yellow-600 via-amber-600 to-orange-600 bg-clip-text text-transparent">
               About Vow Venues
             </span>
           </h1>
@@ -118,20 +118,20 @@ export default function About() {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.8, duration: 0.6 }}
-            className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-pink-100 relative overflow-hidden"
+            className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-yellow-200 relative overflow-hidden"
           >
-            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full -translate-y-16 translate-x-16 opacity-10" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full -translate-y-16 translate-x-16 opacity-10" />
 
             <div className="relative">
               <motion.div
-                className="w-16 h-16 bg-gradient-to-r from-pink-500 to-rose-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg"
+                className="w-16 h-16 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg"
                 whileHover={{ scale: 1.1, rotate: 10 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <Heart className="w-8 h-8 text-white fill-current" />
               </motion.div>
 
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent mb-6">
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent mb-6">
                 Our Mission
               </h2>
               <p className="text-gray-600 leading-relaxed text-lg">
@@ -146,20 +146,20 @@ export default function About() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1, duration: 0.6 }}
-            className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-pink-100 relative overflow-hidden"
+            className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-yellow-200 relative overflow-hidden"
           >
-            <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-rose-400 to-pink-500 rounded-full translate-y-16 -translate-x-16 opacity-10" />
+            <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-amber-400 to-yellow-500 rounded-full translate-y-16 -translate-x-16 opacity-10" />
 
             <div className="relative">
               <motion.div
-                className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg"
+                className="w-16 h-16 bg-gradient-to-r from-amber-500 to-yellow-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg"
                 whileHover={{ scale: 1.1, rotate: -10 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <Sparkles className="w-8 h-8 text-white" />
               </motion.div>
 
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-amber-600 to-yellow-600 bg-clip-text text-transparent mb-6">
                 Our Vision
               </h2>
               <p className="text-gray-600 leading-relaxed text-lg">
@@ -179,7 +179,7 @@ export default function About() {
           transition={{ delay: 1.2, duration: 0.8 }}
         >
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent mb-4">
               Why Choose Vow Venues?
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -229,7 +229,7 @@ export default function About() {
 
         {/* CTA Section */}
         <motion.div
-          className="text-center bg-gradient-to-r from-pink-600 to-purple-600 rounded-3xl p-12 text-white relative overflow-hidden"
+          className="text-center bg-gradient-to-r from-yellow-500 to-amber-500 rounded-3xl p-12 text-white relative overflow-hidden"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 2, duration: 0.8 }}
@@ -251,7 +251,7 @@ export default function About() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="inline-flex items-center bg-white text-pink-600 px-8 py-4 rounded-2xl hover:bg-gray-50 transition-all duration-300 font-bold text-lg shadow-xl hover:shadow-2xl"
+              className="inline-flex items-center bg-white text-yellow-600 px-8 py-4 rounded-2xl hover:bg-gray-50 transition-all duration-300 font-bold text-lg shadow-xl hover:shadow-2xl"
             >
               <Sparkles className="w-6 h-6 mr-2" />
               Explore Venues Now
