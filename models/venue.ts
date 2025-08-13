@@ -11,7 +11,13 @@ const venueSchema = new mongoose.Schema<IVenue>({
   email: { type: String },
   ownerId: { type: String },
   images: [{ type: String }],
-  featuredImage: { type: String }
+  featuredImage: { type: String },
+  class: { type: String, enum: ['standard', 'middle', 'high'], default: 'standard' },
+  latitude: { type: Number },
+  longitude: { type: Number },
+  description: { type: String },
+  amenities: [{ type: String }],
+  contactEmail: { type: String }
 }, {
   timestamps: true
 });
