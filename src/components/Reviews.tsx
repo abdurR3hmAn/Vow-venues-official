@@ -30,70 +30,14 @@ interface Review {
   verified?: boolean
 }
 
-// Mock reviews data - in real app, this would come from API
-const mockReviews: Review[] = [
-  {
-    id: '1',
-    name: 'Sarah Ahmed',
-    email: 'sarah@example.com',
-    rating: 5,
-    subject: 'Amazing venue selection and service!',
-    message: 'I found the perfect wedding hall through Vow Venues. The booking process was smooth and the staff was very helpful. Elite Royale Wedding Palace exceeded our expectations. The facilities were top-notch and our wedding day was absolutely perfect!',
-    feedbackType: 'venue',
-    venueExperience: 'Elite Royale Wedding Palace - Outstanding service, beautiful decoration, excellent food quality',
-    wouldRecommend: true,
-    date: '2024-01-15',
-    verified: true
-  },
-  {
-    id: '2',
-    name: 'Ahmed Khan',
-    email: 'ahmed@example.com',
-    rating: 4,
-    subject: 'Great platform with good variety',
-    message: 'Vow Venues has a good selection of halls in Peshawar. The filtering system made it easy to find venues within our budget. The only suggestion would be to add more photos for each venue.',
-    feedbackType: 'general',
-    wouldRecommend: true,
-    date: '2024-01-20',
-    verified: true
-  },
-  {
-    id: '3',
-    name: 'Fatima Ali',
-    email: 'fatima@example.com',
-    rating: 5,
-    subject: 'Excellent customer support',
-    message: 'The customer support team was incredibly helpful when I had questions about venue availability. They responded quickly and provided all the information I needed. Highly recommend this platform!',
-    feedbackType: 'support',
-    wouldRecommend: true,
-    date: '2024-01-25',
-    verified: false
-  },
-  {
-    id: '4',
-    name: 'Muhammad Hassan',
-    email: 'hassan@example.com',
-    rating: 4,
-    subject: 'Easy booking process',
-    message: 'The booking process was straightforward and user-friendly. I was able to compare different venues easily and make an informed decision. The payment integration worked smoothly.',
-    feedbackType: 'booking',
-    wouldRecommend: true,
-    date: '2024-02-01',
-    verified: true
-  },
-  {
-    id: '5',
-    name: 'Aisha Malik',
-    email: 'aisha@example.com',
-    rating: 3,
-    subject: 'Good but could be improved',
-    message: 'Overall good experience but I think the map feature could be more accurate. Sometimes the directions were not precise. Also, it would be great to have virtual tours of the venues.',
-    feedbackType: 'feature',
-    wouldRecommend: true,
-    date: '2024-02-05',
-    verified: true
+// API function to fetch reviews
+async function fetchReviews(): Promise<Review[]> {
+  const response = await fetch('/api/reviews')
+  if (!response.ok) {
+    throw new Error('Failed to fetch reviews')
   }
-]
+  return response.json()
+}
 
 const FloatingElement = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => (
   <motion.div
