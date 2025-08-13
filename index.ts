@@ -69,12 +69,12 @@ app.use((req, res, next) => {
 
         const server = await registerRoutes(app);
 
-        // Serve static files in development for now
-        app.use(express.static('.'));
+        // Serve built client files
+        app.use(express.static(path.resolve(__dirname, 'dist')));
         app.get('*', (req, res) => {
-          res.sendFile(path.resolve(__dirname, 'index.html'));
+          res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
         });
-        console.log('Serving static files for development');
+        console.log('Serving built client from dist directory');
 
         server.listen(PORT, '0.0.0.0', () => {
           console.log(`Server running at http://0.0.0.0:${PORT}`);
