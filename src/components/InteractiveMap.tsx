@@ -17,8 +17,8 @@ interface UserLocation {
   lng: number
 }
 
-// Google Maps API key - in a real app, this should be in environment variables
-const GOOGLE_MAPS_API_KEY = 'AIzaSyBhZsH0nKf_HvHm1YB8tZXz2Z1q8LQJ8oY' // Replace with your actual API key
+// Google Maps API key from environment variables
+const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || 'demo-key'
 
 export default function InteractiveMap({ venue }: InteractiveMapProps) {
   const mapRef = useRef<HTMLDivElement>(null)
