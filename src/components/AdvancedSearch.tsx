@@ -77,20 +77,12 @@ export default function AdvancedSearch({
         transition={{ duration: 0.3 }}
       >
         {activeTab === 'venue' ? (
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
-              <Search className="h-6 w-6 text-yellow-500" />
-            </div>
-            <motion.input
-              type="text"
-              placeholder="Search venues by name, type, or features..."
-              value={venueSearchTerm}
-              onChange={(e) => onVenueSearch(e.target.value)}
-              className="w-full pl-14 pr-6 py-5 text-lg border-2 border-yellow-200 rounded-2xl focus:ring-4 focus:ring-yellow-200 focus:border-yellow-500 transition-all duration-300 bg-white/80 backdrop-blur-sm shadow-lg"
-              whileFocus={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            />
-          </div>
+          <VenueSearch
+            venues={venues}
+            placeholder="Search venues by name, type, or features..."
+            onVenueSelect={onVenueSelect}
+            className="w-full"
+          />
         ) : (
           <LocationAutocomplete
             placeholder="Search by city, area, or specific location..."
