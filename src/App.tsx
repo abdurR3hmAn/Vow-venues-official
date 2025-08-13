@@ -6,6 +6,7 @@ import { Heart, MapPin, Phone } from 'lucide-react'
 import Home from './components/Home'
 import Login from './components/Login'
 import About from './components/About'
+import VenueBooking from './components/VenueBooking'
 
 const queryClient = new QueryClient()
 
@@ -71,6 +72,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/about" element={<About />} />
+            <Route path="/venue/:id" element={<VenueBooking />} />
           </Routes>
         </div>
       </Router>
