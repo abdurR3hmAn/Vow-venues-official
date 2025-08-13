@@ -26,8 +26,7 @@ export async function setupVite(app: Express, server: Server) {
     allowedHosts: true,
   } as const;
 
-  const { createServer: createViteServer, createLogger } = await import('vite');
-  const viteLogger = createLogger();
+  const { createServer: createViteServer } = await import('vite');
 
   // Serve static files from the client/public directory
   app.use(express.static(path.resolve(__dirname, "..", "client", "public")));
@@ -47,13 +46,7 @@ export async function setupVite(app: Express, server: Server) {
   const vite = await createViteServer({
     // Let Vite load the config file itself (ESM) to avoid CJS transform and top-level await issues
     configFile: path.resolve(__dirname, "..", "vite.config.ts"),
-    customLogger: {
-      ...viteLogger,
-      error: (msg, options) => {
-        viteLogger.error(msg, options);
-        process.exit(1);
-      },
-    },
+    logLevel: 'info',
     server: serverOptions,
     appType: "custom",
   });
