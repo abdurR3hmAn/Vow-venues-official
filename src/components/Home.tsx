@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { Search, MapPin, Users, Car, Phone, Star, Calendar, Heart, Sparkles, Crown } from 'lucide-react'
-import LocationAutocomplete from './LocationAutocomplete'
+import AdvancedSearch from './AdvancedSearch'
 
 interface Venue {
   _id: string
