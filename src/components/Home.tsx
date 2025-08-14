@@ -148,7 +148,7 @@ const VenueCard = ({ venue, index }: { venue: Venue, index: number }) => {
         </motion.h3>
 
         <div className="flex items-center text-gray-600 mb-4 group-hover:text-gray-800 transition-colors duration-300">
-          <MapPin className="w-4 h-4 mr-2 text-yellow-500" />
+          <MapPin className="w-4 h-4 mr-2 text-orange-500" />
           <span className="text-sm">{venue.address}</span>
         </div>
 
