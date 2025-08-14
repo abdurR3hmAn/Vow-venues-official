@@ -169,7 +169,7 @@ export default function Feedback() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-white to-amber-50">
       {/* Header Section */}
-      <div className="relative overflow-hidden bg-gradient-to-r from-yellow-500 to-amber-600">
+      <div className="relative overflow-hidden bg-gradient-to-r from-orange-600 to-red-600">
         <div className="absolute inset-0 bg-black/10" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="flex items-center justify-between mb-8">
