@@ -216,7 +216,7 @@ export default function Reviews() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-white to-amber-50">
       {/* Header Section */}
-      <div className="relative overflow-hidden bg-gradient-to-r from-yellow-500 to-amber-600">
+      <div className="relative overflow-hidden bg-gradient-to-r from-orange-600 to-red-600">
         <div className="absolute inset-0 bg-black/10" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="flex items-center justify-between mb-8">
@@ -417,7 +417,7 @@ export default function Reviews() {
         {/* Bottom CTA */}
         <FloatingElement delay={0.7}>
           <div className="text-center mt-16">
-            <div className="bg-gradient-to-r from-yellow-500 to-amber-600 rounded-3xl p-8 text-white">
+            <div className="bg-gradient-to-r from-orange-600 to-red-600 rounded-3xl p-8 text-white">
               <h3 className="text-2xl font-bold mb-4">Share Your Experience</h3>
               <p className="text-yellow-100 mb-6 max-w-2xl mx-auto">
                 Help other couples find their perfect venue by sharing your experience with Vow Venues
