@@ -69,6 +69,9 @@ app.use((req, res, next) => {
 
         const server = await registerRoutes(app);
 
+        // Serve static images from public folder
+        app.use('/images', express.static(path.resolve(__dirname, 'public/images')));
+
         // Serve built client files
         app.use(express.static(path.resolve(__dirname, 'dist')));
         app.get('*', (req, res) => {
