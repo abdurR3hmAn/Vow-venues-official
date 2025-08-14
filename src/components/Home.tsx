@@ -84,7 +84,7 @@ const VenueCard = ({ venue, index }: { venue: Venue, index: number }) => {
       whileHover={{ y: -8, scale: 1.02 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-yellow-200"
+      className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-orange-200"
     >
       {/* Featured Image */}
       <div className="relative h-48 overflow-hidden bg-gray-100">
@@ -154,7 +154,7 @@ const VenueCard = ({ venue, index }: { venue: Venue, index: number }) => {
 
         <div className="space-y-3 mb-6">
           <motion.div
-            className="flex items-center justify-between p-3 bg-gradient-to-r from-yellow-50 to-amber-50 rounded-xl border border-yellow-200"
+            className="flex items-center justify-between p-3 bg-gradient-to-r from-yellow-50 to-amber-50 rounded-xl border border-orange-200"
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
@@ -198,7 +198,7 @@ const VenueCard = ({ venue, index }: { venue: Venue, index: number }) => {
             href={`tel:${venue.phone}`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="flex-1 flex items-center justify-center px-4 py-3 border-2 border-yellow-200 text-yellow-600 rounded-xl hover:bg-yellow-50 transition-all duration-300 font-medium group"
+            className="flex-1 flex items-center justify-center px-4 py-3 border-2 border-orange-200 text-yellow-600 rounded-xl hover:bg-yellow-50 transition-all duration-300 font-medium group"
           >
             <Phone className="w-4 h-4 mr-2 group-hover:animate-bounce" />
             Call Now
@@ -329,7 +329,7 @@ export default function Home() {
 
       {/* Filter Panel */}
       <FloatingElement delay={0.6}>
-        <div className="bg-white/90 backdrop-blur-sm border-y border-yellow-200 py-6">
+        <div className="bg-white/90 backdrop-blur-sm border-y border-orange-200 py-6">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.button
               onClick={() => setShowFilters(!showFilters)}
@@ -350,7 +350,7 @@ export default function Home() {
                   transition={{ duration: 0.3 }}
                   className="mt-6 overflow-hidden"
                 >
-                  <div className="bg-white rounded-2xl p-6 shadow-lg border border-yellow-200">
+                  <div className="bg-white rounded-2xl p-6 shadow-lg border border-orange-200">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
                       {/* Price Range Filter */}
@@ -425,7 +425,7 @@ export default function Home() {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={clearFilters}
-                        className="px-6 py-2 border-2 border-yellow-200 text-yellow-600 rounded-xl hover:bg-yellow-50 transition-all duration-300 font-medium"
+                        className="px-6 py-2 border-2 border-orange-200 text-yellow-600 rounded-xl hover:bg-yellow-50 transition-all duration-300 font-medium"
                       >
                         Clear All Filters
                       </motion.button>
@@ -443,7 +443,7 @@ export default function Home() {
         filters.capacityRange[0] > 0 || filters.capacityRange[1] < 5000 ||
         filters.venueClass.length > 0 || searchTerm.length > 0) && (
         <FloatingElement delay={0.65}>
-          <div className="bg-yellow-50 border border-yellow-200 py-4">
+          <div className="bg-yellow-50 border border-orange-200 py-4">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex items-center justify-between flex-wrap gap-4">
                 <div className="flex items-center space-x-4 flex-wrap">
@@ -518,7 +518,7 @@ export default function Home() {
 
       {/* Stats Section */}
       <FloatingElement delay={0.7}>
-        <div className="bg-white/80 backdrop-blur-sm border-y border-yellow-200">
+        <div className="bg-white/80 backdrop-blur-sm border-y border-orange-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               {[
