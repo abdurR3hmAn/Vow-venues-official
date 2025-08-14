@@ -95,27 +95,35 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const feedbackData = req.body;
 
-      // Log feedback data (in production, you'd save to database)
-      console.log('Feedback received:', {
-        timestamp: new Date().toISOString(),
+      // Create new feedback record
+      const feedback = new Feedback({
         name: feedbackData.name,
         email: feedbackData.email,
-        type: feedbackData.feedbackType,
+        phone: feedbackData.phone,
+        feedbackType: feedbackData.feedbackType,
         rating: feedbackData.rating,
         subject: feedbackData.subject,
-        wouldRecommend: feedbackData.wouldRecommend
+        message: feedbackData.message,
+        venueExperience: feedbackData.venueExperience,
+        wouldRecommend: feedbackData.wouldRecommend,
+        verified: false // New feedback starts unverified
       });
 
-      // In a real application, you would:
-      // 1. Validate the feedback data
-      // 2. Save to database
-      // 3. Send confirmation email
-      // 4. Trigger notifications to admin team
+      // Save to database
+      const savedFeedback = await feedback.save();
+
+      console.log('Feedback saved:', {
+        id: savedFeedback._id,
+        name: feedbackData.name,
+        email: feedbackData.email,
+        rating: feedbackData.rating,
+        subject: feedbackData.subject
+      });
 
       res.json({
         success: true,
         message: "Feedback submitted successfully",
-        id: `feedback_${Date.now()}`
+        id: savedFeedback._id.toString()
       });
     } catch (error) {
       console.error('Error processing feedback:', error);
