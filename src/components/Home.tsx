@@ -198,7 +198,7 @@ const VenueCard = ({ venue, index }: { venue: Venue, index: number }) => {
             href={`tel:${venue.phone}`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="flex-1 flex items-center justify-center px-4 py-3 border-2 border-orange-200 text-yellow-600 rounded-xl hover:bg-yellow-50 transition-all duration-300 font-medium group"
+            className="flex-1 flex items-center justify-center px-4 py-3 border-2 border-orange-200 text-yellow-600 rounded-xl hover:bg-orange-50 transition-all duration-300 font-medium group"
           >
             <Phone className="w-4 h-4 mr-2 group-hover:animate-bounce" />
             Call Now
@@ -397,7 +397,7 @@ export default function Home() {
                               className={`w-full flex items-center justify-between p-3 rounded-xl border-2 transition-all duration-300 ${
                                 filters.venueClass.includes(classType.value)
                                   ? `bg-gradient-to-r ${classType.color} text-white border-transparent shadow-lg`
-                                  : 'bg-white border-gray-200 text-gray-700 hover:border-yellow-300 hover:bg-yellow-50'
+                                  : 'bg-white border-gray-200 text-gray-700 hover:border-yellow-300 hover:bg-orange-50'
                               }`}
                             >
                               <div className="flex items-center">
@@ -425,7 +425,7 @@ export default function Home() {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={clearFilters}
-                        className="px-6 py-2 border-2 border-orange-200 text-yellow-600 rounded-xl hover:bg-yellow-50 transition-all duration-300 font-medium"
+                        className="px-6 py-2 border-2 border-orange-200 text-yellow-600 rounded-xl hover:bg-orange-50 transition-all duration-300 font-medium"
                       >
                         Clear All Filters
                       </motion.button>
@@ -443,7 +443,7 @@ export default function Home() {
         filters.capacityRange[0] > 0 || filters.capacityRange[1] < 5000 ||
         filters.venueClass.length > 0 || searchTerm.length > 0) && (
         <FloatingElement delay={0.65}>
-          <div className="bg-yellow-50 border border-orange-200 py-4">
+          <div className="bg-orange-50 border border-orange-200 py-4">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex items-center justify-between flex-wrap gap-4">
                 <div className="flex items-center space-x-4 flex-wrap">
