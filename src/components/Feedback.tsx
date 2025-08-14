@@ -298,7 +298,7 @@ export default function Feedback() {
                         <motion.span
                           initial={{ opacity: 0, x: -10 }}
                           animate={{ opacity: 1, x: 0 }}
-                          className="text-yellow-600"
+                          className="text-orange-600"
                         >
                           {formData.rating === 1 && "Poor"}
                           {formData.rating === 2 && "Fair"}
@@ -435,7 +435,7 @@ export default function Feedback() {
         <FloatingElement delay={0.5}>
           <div className="mt-12 text-center">
             <div className="bg-yellow-50 border border-yellow-200 rounded-2xl p-8">
-              <Heart className="w-8 h-8 text-yellow-600 mx-auto mb-4" />
+              <Heart className="w-8 h-8 text-orange-600 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 Thank you for helping us improve!
               </h3>
