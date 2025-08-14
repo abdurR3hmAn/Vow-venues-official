@@ -63,37 +63,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Reviews endpoint - get all feedback/reviews
   app.get("/api/reviews", async (req, res) => {
     try {
-      // In a real application, you would fetch reviews from database
-      // For now, returning mock data
-      const mockReviews = [
-        {
-          id: '1',
-          name: 'Sarah Ahmed',
-          email: 'sarah@example.com',
-          rating: 5,
-          subject: 'Amazing venue selection and service!',
-          message: 'I found the perfect wedding hall through Vow Venues. The booking process was smooth and the staff was very helpful. Elite Royale Wedding Palace exceeded our expectations.',
-          feedbackType: 'venue',
-          venueExperience: 'Elite Royale Wedding Palace - Outstanding service, beautiful decoration, excellent food quality',
-          wouldRecommend: true,
-          date: '2024-01-15',
-          verified: true
-        },
-        {
-          id: '2',
-          name: 'Ahmed Khan',
-          email: 'ahmed@example.com',
-          rating: 4,
-          subject: 'Great platform with good variety',
-          message: 'Vow Venues has a good selection of halls in Peshawar. The filtering system made it easy to find venues within our budget.',
-          feedbackType: 'general',
-          wouldRecommend: true,
-          date: '2024-01-20',
-          verified: true
-        }
-      ];
+      // Fetch real feedback from database
+      const feedback = await Feedback.find()
+        .sort({ createdAt: -1 }) // Most recent first
+        .lean();
 
-      res.json(mockReviews);
+      // Transform to match frontend interface
+      const reviews = feedback.map(item => ({
+        id: item._id.toString(),
+        name: item.name,
+        email: item.email,
+        rating: item.rating,
+        subject: item.subject,
+        message: item.message,
+        feedbackType: item.feedbackType,
+        venueExperience: item.venueExperience,
+        wouldRecommend: item.wouldRecommend,
+        date: item.date || item.createdAt,
+        verified: item.verified || false
+      }));
+
+      res.json(reviews);
     } catch (error) {
       console.error('Error fetching reviews:', error);
       res.status(500).json({ message: "Internal server error" });
