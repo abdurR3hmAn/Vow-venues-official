@@ -289,11 +289,11 @@ export default function Home() {
                 animate={{ scale: 1 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
               >
-                <span className="bg-gradient-to-r from-yellow-600 via-amber-600 to-orange-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-orange-700 via-red-600 to-orange-800 bg-clip-text text-transparent">
                   Find Your
                 </span>
                 <br />
-                <span className="bg-gradient-to-r from-amber-600 via-yellow-600 to-orange-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-red-600 via-orange-600 to-red-700 bg-clip-text text-transparent">
                   Perfect Venue
                 </span>
               </motion.h1>
