@@ -138,7 +138,7 @@ const ReviewCard = ({ review, index }: { review: Review, index: number }) => {
         {review.message.length > 200 && (
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="text-yellow-600 hover:text-yellow-700 text-sm font-medium"
+            className="text-orange-600 hover:text-yellow-700 text-sm font-medium"
           >
             {isExpanded ? 'Show less' : 'Show more'}
           </button>
@@ -253,7 +253,7 @@ export default function Reviews() {
                 onClick={() => navigate('/feedback')}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white text-yellow-600 px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-3 mx-auto"
+                className="bg-white text-orange-600 px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-3 mx-auto"
               >
                 <PenTool className="w-5 h-5" />
                 <span>Write a Review</span>
@@ -269,12 +269,12 @@ export default function Reviews() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div className="text-center">
-                <div className="text-3xl font-bold text-yellow-600 mb-2">{reviews.length}</div>
+                <div className="text-3xl font-bold text-orange-600 mb-2">{reviews.length}</div>
                 <div className="text-gray-600">Total Reviews</div>
               </div>
               <div className="text-center">
                 <div className="flex items-center justify-center mb-2">
-                  <span className="text-3xl font-bold text-yellow-600 mr-2">
+                  <span className="text-3xl font-bold text-orange-600 mr-2">
                     {averageRating.toFixed(1)}
                   </span>
                   <StarRating rating={Math.round(averageRating)} />
@@ -426,7 +426,7 @@ export default function Reviews() {
                 onClick={() => navigate('/feedback')}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white text-yellow-600 px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 inline-flex items-center space-x-3"
+                className="bg-white text-orange-600 px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 inline-flex items-center space-x-3"
               >
                 <PenTool className="w-5 h-5" />
                 <span>Write Your Review</span>
