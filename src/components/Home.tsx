@@ -208,7 +208,7 @@ const VenueCard = ({ venue, index }: { venue: Venue, index: number }) => {
             onClick={handleBookNow}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="flex-1 bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-4 py-3 rounded-xl hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 font-medium shadow-lg hover:shadow-xl flex items-center justify-center group"
+            className="flex-1 bg-gradient-to-r from-orange-600 to-red-600 text-white px-4 py-3 rounded-xl hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 font-medium shadow-lg hover:shadow-xl flex items-center justify-center group"
           >
             <Calendar className="w-4 h-4 mr-2 group-hover:animate-pulse" />
             Book Now
@@ -335,7 +335,7 @@ export default function Home() {
               onClick={() => setShowFilters(!showFilters)}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="flex items-center space-x-2 bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-6 py-3 rounded-xl hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 font-medium shadow-lg"
+              className="flex items-center space-x-2 bg-gradient-to-r from-orange-600 to-red-600 text-white px-6 py-3 rounded-xl hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 font-medium shadow-lg"
             >
               <span className="text-lg">🎛️</span>
               <span>Advanced Filters ({filteredVenues.length} of {venues?.length || 0} venues)</span>
@@ -537,7 +537,7 @@ export default function Home() {
                   <motion.div
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     transition={{ type: "spring", stiffness: 300 }}
-                    className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-full flex items-center justify-center shadow-lg"
+                    className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-orange-600 to-red-600 rounded-full flex items-center justify-center shadow-lg"
                   >
                     <stat.icon className="w-8 h-8 text-white" />
                   </motion.div>
