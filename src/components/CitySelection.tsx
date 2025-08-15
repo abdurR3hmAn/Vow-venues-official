@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { MapPin, Users, Heart, Sparkles } from 'lucide-react'
+import { MapPin, Users, Heart, Sparkles, Target, Award, Clock, Shield } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 const cities = [
