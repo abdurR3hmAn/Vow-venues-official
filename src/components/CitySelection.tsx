@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { MapPin, Users } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const cities = [
   { id: 'peshawar', name: 'Peshawar', count: 58, icon: '🏛️' },
