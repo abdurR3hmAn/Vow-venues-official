@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { User, Lock, Eye, EyeOff, Heart, Sparkles } from 'lucide-react'
+import { useAuth } from '../contexts/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -9,15 +11,31 @@ export default function Login() {
   })
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('')
+
+  const { login, isAuthenticated } = useAuth()
+  const navigate = useNavigate()
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/')
+    }
+  }, [isAuthenticated, navigate])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
-    // TODO: Implement login logic
-    setTimeout(() => {
-      console.log('Login attempt:', formData)
+    setError('')
+
+    try {
+      await login(formData.username, formData.password)
+      navigate('/')
+    } catch (err: any) {
+      setError(err.message || 'Login failed')
+    } finally {
       setIsLoading(false)
-    }, 2000)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
