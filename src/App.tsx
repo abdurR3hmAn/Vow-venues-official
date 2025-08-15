@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { MapPin, Phone, Menu, X } from 'lucide-react'
+import { MapPin, Phone, Menu, X, LogOut } from 'lucide-react'
 import Home from './components/Home'
 import Login from './components/Login'
 import About from './components/About'
 import VenueBooking from './components/VenueBooking'
 import Feedback from './components/Feedback'
 import Reviews from './components/Reviews'
+import { AuthProvider, useAuth } from './contexts/AuthContext'
 
 const queryClient = new QueryClient()
 
