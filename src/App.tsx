@@ -13,6 +13,16 @@ import Reviews from './components/Reviews'
 const queryClient = new QueryClient()
 
 function App() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen)
+  }
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false)
+  }
+
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
@@ -38,12 +48,14 @@ function App() {
                     >
                       <span className="text-2xl font-bold text-white">VV</span>
                     </motion.div>
-                    <span className="text-3xl font-bold bg-gradient-to-r from-orange-700 via-red-600 to-orange-800 bg-clip-text text-transparent">
+                    <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-orange-700 via-red-600 to-orange-800 bg-clip-text text-transparent">
                       Vow Venues
                     </span>
                   </Link>
                 </motion.div>
-                <div className="flex items-center space-x-8">
+
+                {/* Desktop Navigation */}
+                <div className="hidden md:flex items-center space-x-8">
                   <motion.div whileHover={{ y: -2 }} transition={{ type: "spring", stiffness: 300 }}>
                     <Link to="/" className="text-gray-700 hover:text-orange-600 font-medium transition-colors duration-300 relative group">
                       Home
@@ -78,8 +90,106 @@ function App() {
                     </Link>
                   </motion.div>
                 </div>
+
+                {/* Mobile Hamburger Menu */}
+                <div className="md:hidden flex items-center">
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={toggleMobileMenu}
+                    className="p-2 rounded-lg text-gray-700 hover:text-orange-600 hover:bg-orange-50 transition-colors duration-300"
+                  >
+                    {isMobileMenuOpen ? (
+                      <X className="h-6 w-6" />
+                    ) : (
+                      <Menu className="h-6 w-6" />
+                    )}
+                  </motion.button>
+                </div>
               </div>
             </div>
+
+            {/* Mobile Menu Popup */}
+            <AnimatePresence>
+              {isMobileMenuOpen && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="md:hidden bg-white/95 backdrop-blur-lg border-t border-orange-200"
+                >
+                  <div className="px-4 py-6 space-y-4">
+                    <motion.div
+                      initial={{ x: -20, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{ delay: 0.1 }}
+                    >
+                      <Link
+                        to="/"
+                        onClick={closeMobileMenu}
+                        className="block text-lg font-medium text-gray-700 hover:text-orange-600 transition-colors duration-300 py-2 border-b border-gray-100"
+                      >
+                        Home
+                      </Link>
+                    </motion.div>
+                    <motion.div
+                      initial={{ x: -20, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      <Link
+                        to="/about"
+                        onClick={closeMobileMenu}
+                        className="block text-lg font-medium text-gray-700 hover:text-orange-600 transition-colors duration-300 py-2 border-b border-gray-100"
+                      >
+                        About
+                      </Link>
+                    </motion.div>
+                    <motion.div
+                      initial={{ x: -20, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      <Link
+                        to="/reviews"
+                        onClick={closeMobileMenu}
+                        className="block text-lg font-medium text-gray-700 hover:text-orange-600 transition-colors duration-300 py-2 border-b border-gray-100"
+                      >
+                        Reviews
+                      </Link>
+                    </motion.div>
+                    <motion.div
+                      initial={{ x: -20, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{ delay: 0.4 }}
+                    >
+                      <Link
+                        to="/feedback"
+                        onClick={closeMobileMenu}
+                        className="block text-lg font-medium text-gray-700 hover:text-orange-600 transition-colors duration-300 py-2 border-b border-gray-100"
+                      >
+                        Feedback
+                      </Link>
+                    </motion.div>
+                    <motion.div
+                      initial={{ x: -20, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{ delay: 0.5 }}
+                      className="pt-4"
+                    >
+                      <Link
+                        to="/login"
+                        onClick={closeMobileMenu}
+                        className="block w-full bg-gradient-to-r from-orange-600 to-red-600 text-white text-center px-6 py-3 rounded-full hover:from-orange-700 hover:to-red-700 transition-all duration-300 font-medium shadow-lg"
+                      >
+                        Login
+                      </Link>
+                    </motion.div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.nav>
 
           <Routes>
