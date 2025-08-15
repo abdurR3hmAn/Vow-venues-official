@@ -103,6 +103,16 @@ export default function Login() {
             <p className="text-gray-600">Sign in to your Vow Venues account</p>
           </motion.div>
 
+          {error && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg mb-4"
+            >
+              {error}
+            </motion.div>
+          )}
+
           <motion.form
             onSubmit={handleSubmit}
             className="space-y-6"
