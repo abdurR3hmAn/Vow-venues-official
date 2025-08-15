@@ -128,10 +128,91 @@ export default function CitySelection() {
           ))}
         </div>
 
+        {/* Our Mission Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.8 }}
+          className="mb-16"
+        >
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+              Our Mission
+            </h2>
+            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              At Vow Venues, we believe every love story deserves the perfect backdrop.
+              Our mission is to connect couples with extraordinary venues that transform
+              their special moments into unforgettable memories.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9 }}
+              className="text-center group"
+            >
+              <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                <Target className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-3">Perfect Match</h3>
+              <p className="text-gray-600">
+                Connecting you with venues that perfectly align with your vision and budget
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.0 }}
+              className="text-center group"
+            >
+              <div className="w-16 h-16 bg-gradient-to-r from-red-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                <Award className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-3">Quality Assured</h3>
+              <p className="text-gray-600">
+                Every venue is carefully curated to meet our high standards of excellence
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.1 }}
+              className="text-center group"
+            >
+              <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                <Clock className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-3">Time Saving</h3>
+              <p className="text-gray-600">
+                Streamlined booking process that saves you time and reduces stress
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2 }}
+              className="text-center group"
+            >
+              <div className="w-16 h-16 bg-gradient-to-r from-red-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                <Shield className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-3">Trusted Service</h3>
+              <p className="text-gray-600">
+                Reliable platform with verified venues and transparent pricing
+              </p>
+            </motion.div>
+          </div>
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
+          transition={{ delay: 1.3 }}
           className="text-center bg-gradient-to-r from-orange-50 to-red-50 rounded-3xl p-12 border border-orange-200"
         >
           <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
