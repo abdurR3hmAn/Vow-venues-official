@@ -232,16 +232,16 @@ export default function Home() {
     searchTerm: ''
   })
 
-  // Show AuthPrompt if user is not authenticated
-  if (!authLoading && !isAuthenticated) {
-    return <AuthPrompt />
-  }
-
   const { data: venues, isLoading, error } = useQuery({
     queryKey: ['venues'],
     queryFn: fetchVenues,
     enabled: isAuthenticated // Only fetch venues if authenticated
   })
+
+  // Show city selection for non-authenticated users
+  if (!authLoading && !isAuthenticated) {
+    return <CitySelection />
+  }
 
   const filteredVenues = venues?.filter(venue => {
     // Search filter - only apply if there's a search term
