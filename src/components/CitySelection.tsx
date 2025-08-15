@@ -21,7 +21,7 @@ export default function CitySelection() {
         className="text-center mb-12"
       >
         <h1 className="text-3xl md:text-5xl font-bold text-gray-800 mb-6">
-          Eventza coming to your city
+          Vow Venues coming to your city
         </h1>
         <p className="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto">
           Explore the best marriage halls of your city with best prices
