@@ -222,6 +222,7 @@ const VenueCard = ({ venue, index }: { venue: Venue, index: number }) => {
 }
 
 export default function Home() {
+  const { isAuthenticated, isLoading: authLoading } = useAuth()
   const [searchTerm, setSearchTerm] = useState('')
   const [showFilters, setShowFilters] = useState(false)
   const [filters, setFilters] = useState<FilterState>({
@@ -231,9 +232,15 @@ export default function Home() {
     searchTerm: ''
   })
 
+  // Show AuthPrompt if user is not authenticated
+  if (!authLoading && !isAuthenticated) {
+    return <AuthPrompt />
+  }
+
   const { data: venues, isLoading, error } = useQuery({
     queryKey: ['venues'],
-    queryFn: fetchVenues
+    queryFn: fetchVenues,
+    enabled: isAuthenticated // Only fetch venues if authenticated
   })
 
   const filteredVenues = venues?.filter(venue => {
