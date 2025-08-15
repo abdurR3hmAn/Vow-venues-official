@@ -65,20 +65,28 @@ export default function CitySelection() {
           Sign up to discover and book the perfect venue for your special day
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <motion.button
+          <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-gradient-to-r from-orange-600 to-red-600 text-white px-8 py-4 rounded-full hover:from-orange-700 hover:to-red-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl"
           >
-            Sign Up to Explore
-          </motion.button>
-          <motion.button
+            <Link
+              to="/login"
+              className="block bg-gradient-to-r from-orange-600 to-red-600 text-white px-8 py-4 rounded-full hover:from-orange-700 hover:to-red-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl text-center"
+            >
+              Sign Up to Explore
+            </Link>
+          </motion.div>
+          <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="border-2 border-orange-600 text-orange-600 px-8 py-4 rounded-full hover:bg-orange-600 hover:text-white transition-all duration-300 font-semibold"
           >
-            Already have an account?
-          </motion.button>
+            <Link
+              to="/login"
+              className="block border-2 border-orange-600 text-orange-600 px-8 py-4 rounded-full hover:bg-orange-600 hover:text-white transition-all duration-300 font-semibold text-center"
+            >
+              Already have an account?
+            </Link>
+          </motion.div>
         </div>
       </motion.div>
     </div>
