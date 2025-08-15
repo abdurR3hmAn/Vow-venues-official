@@ -6,7 +6,7 @@ import { Search, MapPin, Users, Car, Phone, Star, Calendar, Heart, Sparkles, Cro
 import AdvancedSearch from './AdvancedSearch'
 import SimpleRangeFilter from './SimpleRangeFilter'
 import { useAuth } from '../contexts/AuthContext'
-import AuthPrompt from './AuthPrompt'
+import CitySelection from './CitySelection'
 
 interface Venue {
   _id: string
