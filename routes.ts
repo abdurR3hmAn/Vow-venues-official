@@ -136,6 +136,190 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Booking submission endpoint
+  app.post("/api/bookings", async (req, res) => {
+    try {
+      console.log('[Booking] New booking request:', req.body);
+
+      const {
+        venueId,
+        customerName,
+        customerEmail,
+        customerPhone,
+        eventDate,
+        guestCount,
+        eventType,
+        specialRequirements
+      } = req.body;
+
+      // Validate required fields
+      if (!venueId || !customerName || !customerEmail || !customerPhone || !eventDate || !guestCount) {
+        return res.status(400).json({
+          success: false,
+          message: "All required fields must be provided"
+        });
+      }
+
+      // Get venue details
+      const venue = await storage.getVenueById(venueId);
+      if (!venue) {
+        return res.status(404).json({
+          success: false,
+          message: "Venue not found"
+        });
+      }
+
+      // Check if guest count exceeds venue capacity
+      if (guestCount > venue.capacity) {
+        return res.status(400).json({
+          success: false,
+          message: `Guest count (${guestCount}) exceeds venue capacity (${venue.capacity})`
+        });
+      }
+
+      // Check if event date is in the future
+      const eventDateObj = new Date(eventDate);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      if (eventDateObj < today) {
+        return res.status(400).json({
+          success: false,
+          message: "Event date must be in the future"
+        });
+      }
+
+      // Create booking record
+      const booking = new Booking({
+        venueId: venue._id.toString(),
+        venueName: venue.name,
+        customerName,
+        customerEmail,
+        customerPhone,
+        eventDate,
+        guestCount,
+        eventType: eventType || 'wedding',
+        specialRequirements,
+        totalAmount: venue.price,
+        status: 'pending',
+        paymentStatus: 'pending'
+      });
+
+      const savedBooking = await booking.save();
+      const bookingId = savedBooking._id.toString();
+
+      console.log('[Booking] Booking saved with ID:', bookingId);
+
+      // Prepare data for email service
+      const venueData = {
+        name: venue.name,
+        email: venue.email || venue.contactEmail,
+        phone: venue.phone,
+        address: venue.address,
+        price: venue.price
+      };
+
+      const bookingData = {
+        customerName,
+        customerEmail,
+        customerPhone,
+        eventDate,
+        guestCount,
+        eventType: eventType || 'wedding',
+        specialRequirements
+      };
+
+      // Send emails (non-blocking)
+      const emailPromises = [];
+
+      // Send notification to venue owner
+      if (venueData.email) {
+        console.log('[Booking] Sending notification to venue owner:', venueData.email);
+        emailPromises.push(
+          emailService.sendBookingNotification(venueData, bookingData, bookingId)
+            .catch(error => console.error('[Booking] Failed to send venue notification:', error))
+        );
+      } else {
+        console.log('[Booking] No email address found for venue:', venue.name);
+      }
+
+      // Send confirmation to customer
+      console.log('[Booking] Sending confirmation to customer:', customerEmail);
+      emailPromises.push(
+        emailService.sendBookingConfirmation(venueData, bookingData, bookingId)
+          .catch(error => console.error('[Booking] Failed to send customer confirmation:', error))
+      );
+
+      // Execute email sending in background (don't wait for completion)
+      Promise.all(emailPromises).then(() => {
+        console.log('[Booking] All emails sent successfully');
+      }).catch((error) => {
+        console.error('[Booking] Some emails failed to send:', error);
+      });
+
+      // Return success response immediately
+      res.json({
+        success: true,
+        message: "Booking submitted successfully",
+        bookingId: bookingId,
+        booking: {
+          id: bookingId,
+          venueName: venue.name,
+          customerName,
+          eventDate,
+          guestCount,
+          totalAmount: venue.price,
+          status: 'pending'
+        }
+      });
+
+    } catch (error) {
+      console.error('[Booking] Error processing booking:', error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to process booking. Please try again."
+      });
+    }
+  });
+
+  // Get bookings for a specific venue (for venue owners)
+  app.get("/api/venues/:venueId/bookings", async (req, res) => {
+    try {
+      const { venueId } = req.params;
+      const bookings = await Booking.find({ venueId }).sort({ createdAt: -1 });
+
+      res.json({
+        success: true,
+        bookings
+      });
+    } catch (error) {
+      console.error('[Booking] Error fetching venue bookings:', error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to fetch bookings"
+      });
+    }
+  });
+
+  // Get bookings for a specific customer
+  app.get("/api/bookings/customer/:email", async (req, res) => {
+    try {
+      const { email } = req.params;
+      const bookings = await Booking.find({ customerEmail: email }).sort({ createdAt: -1 });
+
+      res.json({
+        success: true,
+        bookings
+      });
+    } catch (error) {
+      console.error('[Booking] Error fetching customer bookings:', error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to fetch bookings"
+      });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
