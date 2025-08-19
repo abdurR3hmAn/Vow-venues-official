@@ -5,6 +5,8 @@ import { setupAuth } from "./auth";
 import mongoose from "mongoose";
 import { type IVenue } from "./schema";
 import { Feedback } from "./models/feedback";
+import { Booking } from "./models/booking";
+import emailService from "./services/emailService";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Set up authentication routes
