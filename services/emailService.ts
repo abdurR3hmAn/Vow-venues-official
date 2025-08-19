@@ -22,7 +22,7 @@ class EmailService {
   private transporter: nodemailer.Transporter;
 
   constructor() {
-    this.transporter = nodemailer.createTransporter({
+    this.transporter = nodemailer.createTransport({
       service: 'gmail', // You can change this to other email services
       auth: {
         user: process.env.EMAIL_USER || 'your-email@gmail.com',
