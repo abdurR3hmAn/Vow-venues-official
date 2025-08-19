@@ -92,9 +92,34 @@ export default function VenueBooking() {
     )
   }
 
-  const handleBookingSubmit = (e: React.FormEvent) => {
+  const handleBookingSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setActiveTab('payment')
+
+    try {
+      const response = await fetch('/api/bookings', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          venueId: venue._id,
+          ...bookingData
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        // Show success message and move to payment
+        alert(`Booking submitted successfully! Booking ID: ${result.bookingId}\n\nThe venue owner will contact you shortly to confirm details.`);
+        setActiveTab('payment');
+      } else {
+        alert(`Booking failed: ${result.message}`);
+      }
+    } catch (error) {
+      console.error('Error submitting booking:', error);
+      alert('Failed to submit booking. Please try again.');
+    }
   }
 
   const handlePayment = (method: 'easypaisa' | 'jazzcash') => {
