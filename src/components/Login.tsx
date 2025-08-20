@@ -153,7 +153,7 @@ export default function Login() {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-yellow-500" />
+                  <Lock className="h-5 w-5 text-orange-500" />
                 </div>
                 <input
                   type={showPassword ? "text" : "password"}
@@ -162,13 +162,13 @@ export default function Login() {
                   value={formData.password}
                   onChange={handleChange}
                   required
-                  className="w-full pl-12 pr-12 py-4 border-2 border-yellow-200 rounded-xl focus:ring-4 focus:ring-yellow-200 focus:border-yellow-500 transition-all duration-300 bg-white/60 backdrop-blur-sm"
+                  className="w-full pl-12 pr-12 py-4 border-2 border-orange-200 rounded-xl focus:ring-4 focus:ring-orange-200 focus:border-orange-500 transition-all duration-300 bg-white/60 backdrop-blur-sm"
                   placeholder="Enter your password"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-yellow-500 hover:text-yellow-600"
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-orange-500 hover:text-orange-600"
                 >
                   {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
