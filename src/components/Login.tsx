@@ -129,7 +129,7 @@ export default function Login() {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <User className="h-5 w-5 text-yellow-500" />
+                  <User className="h-5 w-5 text-orange-500" />
                 </div>
                 <input
                   type="text"
@@ -138,7 +138,7 @@ export default function Login() {
                   value={formData.username}
                   onChange={handleChange}
                   required
-                  className="w-full pl-12 pr-4 py-4 border-2 border-yellow-200 rounded-xl focus:ring-4 focus:ring-yellow-200 focus:border-yellow-500 transition-all duration-300 bg-white/60 backdrop-blur-sm"
+                  className="w-full pl-12 pr-4 py-4 border-2 border-orange-200 rounded-xl focus:ring-4 focus:ring-orange-200 focus:border-orange-500 transition-all duration-300 bg-white/60 backdrop-blur-sm"
                   placeholder="Enter your username"
                 />
               </div>
