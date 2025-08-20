@@ -57,14 +57,7 @@ function AppContent() {
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <Link to="/" className="flex items-center space-x-3">
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="w-12 h-12 bg-gradient-to-r from-orange-600 to-red-600 rounded-xl flex items-center justify-center shadow-lg"
-                >
-                  <span className="text-2xl font-bold text-white">VV</span>
-                </motion.div>
+              <Link to="/">
                 <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-orange-700 via-red-600 to-orange-800 bg-clip-text text-transparent">
                   Vow Venues
                 </span>
