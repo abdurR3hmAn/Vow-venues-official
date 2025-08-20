@@ -48,7 +48,7 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
       {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-yellow-100 via-white to-amber-100" />
+      <div className="absolute inset-0 bg-gradient-to-br from-orange-100 via-white to-red-100" />
 
       {/* Floating Hearts Animation */}
       {[...Array(6)].map((_, i) => (
