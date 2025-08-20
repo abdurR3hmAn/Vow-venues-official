@@ -227,11 +227,11 @@ export default function CitySelection() {
               whileTap={{ scale: 0.95 }}
             >
               <Link
-                to="/login"
-                className="block bg-gradient-to-r from-orange-600 to-red-600 text-white px-8 py-4 rounded-full hover:from-orange-700 hover:to-red-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl text-center"
-              >
-                Sign Up to Explore
-              </Link>
+              to="/signup"
+              className="block bg-gradient-to-r from-orange-600 to-red-600 text-white px-8 py-4 rounded-full hover:from-orange-700 hover:to-red-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl text-center"
+            >
+              Sign Up to Explore
+            </Link>
             </motion.div>
             <motion.div
               whileHover={{ scale: 1.05 }}
