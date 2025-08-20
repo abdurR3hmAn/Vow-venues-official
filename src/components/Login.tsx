@@ -181,7 +181,7 @@ export default function Login() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="w-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white py-4 px-6 rounded-xl hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 font-medium shadow-lg hover:shadow-xl flex items-center justify-center relative overflow-hidden"
+              className="w-full bg-gradient-to-r from-orange-600 to-red-600 text-white py-4 px-6 rounded-xl hover:from-orange-700 hover:to-red-700 transition-all duration-300 font-medium shadow-lg hover:shadow-xl flex items-center justify-center relative overflow-hidden"
             >
               {isLoading ? (
                 <>
