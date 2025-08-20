@@ -221,7 +221,7 @@ export default function Login() {
             <div className="mt-6 flex items-center justify-center space-x-4 text-sm text-gray-500">
               <motion.a
                 href="#"
-                className="hover:text-yellow-600 transition-colors"
+                className="hover:text-orange-600 transition-colors"
                 whileHover={{ y: -2 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
@@ -230,7 +230,7 @@ export default function Login() {
               <span>•</span>
               <motion.a
                 href="#"
-                className="hover:text-yellow-600 transition-colors"
+                className="hover:text-orange-600 transition-colors"
                 whileHover={{ y: -2 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
