@@ -54,7 +54,7 @@ export default function Login() {
       {[...Array(6)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute text-yellow-300"
+          className="absolute text-orange-300"
           initial={{ y: "100vh", x: Math.random() * window.innerWidth }}
           animate={{
             y: "-100vh",
