@@ -91,13 +91,13 @@ export default function Login() {
             transition={{ delay: 0.2, duration: 0.6 }}
           >
             <motion.div
-              className="w-20 h-20 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg"
+              className="w-20 h-20 bg-gradient-to-r from-orange-600 to-red-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg"
               whileHover={{ scale: 1.1, rotate: 10 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
               <Heart className="w-10 h-10 text-white fill-current" />
             </motion.div>
-            <h2 className="text-3xl font-bold bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent mb-2">
+            <h2 className="text-3xl font-bold bg-gradient-to-r from-orange-700 via-red-600 to-orange-800 bg-clip-text text-transparent mb-2">
               Welcome Back
             </h2>
             <p className="text-gray-600">Sign in to your Vow Venues account</p>
