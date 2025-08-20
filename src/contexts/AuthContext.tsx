@@ -65,12 +65,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       body: JSON.stringify({ username, password }),
     })
 
+    const data = await response.json()
+
     if (!response.ok) {
-      const data = await response.json()
       throw new Error(data.message || 'Login failed')
     }
 
-    const data = await response.json()
     setUser(data.user)
   }
 
