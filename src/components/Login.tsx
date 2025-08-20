@@ -209,15 +209,13 @@ export default function Login() {
           >
             <p className="text-gray-600">
               Don't have an account?{' '}
-              <motion.a
-                href="#"
+              <Link
+                to="/signup"
                 className="text-yellow-600 hover:text-yellow-700 font-medium relative group"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
               >
                 Sign up now
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-500 to-amber-500 group-hover:w-full transition-all duration-300"></span>
-              </motion.a>
+              </Link>
             </p>
 
             <div className="mt-6 flex items-center justify-center space-x-4 text-sm text-gray-500">
