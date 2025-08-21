@@ -75,22 +75,33 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }
 
   const register = async (username: string, password: string, name: string, email: string) => {
-    const response = await fetch('/api/auth/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-      body: JSON.stringify({ username, password, name, email }),
-    })
+    try {
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({ username, password, name, email }),
+      })
 
-    const data = await response.json()
+      let data;
+      try {
+        data = await response.json()
+      } catch (jsonError) {
+        console.error('Failed to parse response JSON:', jsonError)
+        throw new Error('Invalid response from server')
+      }
 
-    if (!response.ok) {
-      throw new Error(data.message || 'Registration failed')
+      if (!response.ok) {
+        throw new Error(data.message || 'Registration failed')
+      }
+
+      setUser(data.user)
+    } catch (error) {
+      console.error('Registration error:', error)
+      throw error
     }
-
-    setUser(data.user)
   }
 
   const logout = async () => {
