@@ -1,7 +1,13 @@
 import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 import { registerRoutes } from "./routes";
 import { importVenues } from "./import-venues";
 import mongoose from "./db";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const PORT = 3001; // Changed from 3000 to avoid port conflict
 
@@ -63,18 +69,15 @@ app.use((req, res, next) => {
 
         const server = await registerRoutes(app);
 
-        // Serve client from the same server
-        if (process.env.NODE_ENV !== 'production') {
-          // Development: mount Vite dev middleware
-          const { setupVite } = await import('./vite');
-          await setupVite(app as any, server as any);
-          console.log('Vite middleware mounted for development');
-        } else {
-          // Production: serve static build from dist
-          const { serveStatic } = await import('./vite');
-          serveStatic(app as any);
-          console.log('Serving static client build');
-        }
+        // Serve static images from public folder
+        app.use('/images', express.static(path.resolve(__dirname, 'public/images')));
+
+        // Serve built client files
+        app.use(express.static(path.resolve(__dirname, 'dist')));
+        app.get('*', (req, res) => {
+          res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
+        });
+        console.log('Serving built client from dist directory');
 
         server.listen(PORT, '0.0.0.0', () => {
           console.log(`Server running at http://0.0.0.0:${PORT}`);

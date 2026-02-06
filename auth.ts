@@ -6,7 +6,7 @@ import { scrypt, randomBytes, timingSafeEqual } from "crypto";
 import { promisify } from "util";
 import { storage } from "./storage";
 import { User } from "./models/user";
-import type { IUser } from "@shared/schema";
+import type { IUser } from "./schema";
 import { Document } from "mongoose";
 
 declare global {

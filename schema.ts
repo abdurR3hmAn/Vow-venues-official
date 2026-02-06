@@ -20,6 +20,14 @@ export interface IVenue {
   price: number;
   email?: string;
   ownerId?: string;
+  images?: string[];
+  featuredImage?: string;
+  class: 'standard' | 'middle' | 'high';
+  latitude?: number;
+  longitude?: number;
+  description?: string;
+  amenities?: string[];
+  contactEmail?: string;
   createdAt: Date;
 }
 
@@ -43,7 +51,15 @@ export const insertVenueSchema = z.object({
   phone: z.string(),
   address: z.string(),
   price: z.number(),
-  email: z.string().email().optional()
+  email: z.string().email().optional(),
+  images: z.array(z.string().url()).optional(),
+  featuredImage: z.string().url().optional(),
+  class: z.enum(['standard', 'middle', 'high']),
+  latitude: z.number().optional(),
+  longitude: z.number().optional(),
+  description: z.string().optional(),
+  amenities: z.array(z.string()).optional(),
+  contactEmail: z.string().email().optional()
 });
 
 
